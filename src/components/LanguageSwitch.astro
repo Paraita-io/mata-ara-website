@@ -1,0 +1,7 @@
+---
+import { routeFor, type Locale, type PageId } from '../content/pages';
+const { locale, pageId } = Astro.props as { locale: Locale; pageId: PageId };
+const other: Locale = locale === 'fr' ? 'en' : 'fr';
+const label = locale === 'fr' ? 'English' : 'Français';
+---
+<a class="language-switch" href={routeFor(pageId, other)} lang={other} hreflang={other} aria-label={locale === 'fr' ? 'Read this page in English' : 'Lire cette page en français'}>{label}</a>

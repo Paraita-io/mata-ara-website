@@ -1,0 +1,15 @@
+---
+import { pages, routeFor, type Locale } from '../content/pages';
+import { site } from '../config/site';
+const { locale } = Astro.props as { locale: Locale };
+const legalLinks = ['privacy', 'legal', 'contact'] as const;
+---
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>© {new Date().getFullYear()} Mata Ara</p>
+    <nav aria-label={locale === 'fr' ? 'Informations' : 'Information'}>
+      <ul class="footer-nav">{legalLinks.map((id) => <li><a href={routeFor(id, locale)}>{pages[id].localized[locale].nav}</a></li>)}</ul>
+    </nav>
+    <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>
+  </div>
+</footer>

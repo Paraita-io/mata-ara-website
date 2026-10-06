@@ -1,0 +1,18 @@
+---
+import { pages, routeFor, type Locale, type PageId } from '../content/pages';
+import LanguageSwitch from './LanguageSwitch.astro';
+const { locale, pageId } = Astro.props as { locale: Locale; pageId: PageId };
+const navIds: PageId[] = ['features', 'support', 'press', 'contact'];
+const menuLabel = locale === 'fr' ? 'Navigation principale' : 'Main navigation';
+---
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href={routeFor('home', locale)} aria-label="Mata Ara — {locale === 'fr' ? 'accueil' : 'home'}"><span class="brand-mark" aria-hidden="true">M</span><span>Mata Ara</span></a>
+    <nav aria-label={menuLabel}>
+      <ul class="header-nav">
+        {navIds.map((id) => <li><a href={routeFor(id, locale)} aria-current={pageId === id ? 'page' : undefined}>{pages[id].localized[locale].nav}</a></li>)}
+      </ul>
+    </nav>
+    <LanguageSwitch locale={locale} pageId={pageId} />
+  </div>
+</header>

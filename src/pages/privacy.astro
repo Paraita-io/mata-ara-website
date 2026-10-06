@@ -1,0 +1,16 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import LanguageSwitch from '../components/LanguageSwitch.astro';
+import { site } from '../config/site';
+---
+<SiteLayout locale="fr" pageId="privacy">
+  <article class="container prose page-content">
+    <p class="eyebrow">Mata Ara</p>
+    <h1>Politique de confidentialité</h1>
+    <p>Cette page est l’adresse historique de confidentialité utilisée par l’application. Consultez la politique localisée, disponible en français et en anglais.</p>
+    <p><a href="/fr/confidentialite/">Lire la politique de confidentialité en français</a></p>
+    <p><a href="/en/privacy/" lang="en">Read the privacy policy in English</a></p>
+    <p>Pour toute question relative à la confidentialité, écrivez à <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>.</p>
+    <LanguageSwitch locale="fr" pageId="privacy" />
+  </article>
+</SiteLayout>
