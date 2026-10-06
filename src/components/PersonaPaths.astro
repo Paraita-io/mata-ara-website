@@ -1,0 +1,22 @@
+---
+import { routeFor, type Locale } from '../content/pages';
+const { locale } = Astro.props as { locale: Locale };
+const fr = locale === 'fr';
+const paths = fr ? [
+  { n: '01', title: 'Je veux suivre ma consommation', text: 'Consultez votre enveloppe mobile, ce qu’il vous reste et l’évolution de votre usage au fil du temps.', label: 'Voir le suivi des données' },
+  { n: '02', title: 'Je veux observer mon réseau', text: 'Explorez l’activité entrante et sortante des interfaces réseau de votre appareil, selon les compteurs disponibles.', label: 'Voir le suivi des interfaces' },
+  { n: '03', title: 'Je pars avec une eSIM', text: 'Configurez manuellement une enveloppe à durée fixe et sa date d’expiration pour suivre votre consommation pendant le voyage.', label: 'Voir le suivi en voyage' },
+] : [
+  { n: '01', title: 'I want to track my data', text: 'Check your mobile allowance, what remains, and how your usage changes over time.', label: 'Explore data tracking' },
+  { n: '02', title: 'I want to monitor my network', text: 'Explore incoming and outgoing activity across your device’s network interfaces, based on available counters.', label: 'Explore interface monitoring' },
+  { n: '03', title: 'I’m travelling with an eSIM', text: 'Manually set a fixed-period allowance and expiry date to keep track of use during your trip.', label: 'Explore travel tracking' },
+];
+---
+<section class="container persona-section" aria-labelledby="persona-title">
+  <div class="section-heading"><p class="eyebrow">{fr ? 'Choisissez votre usage' : 'Choose your use'}</p><h2 id="persona-title">{fr ? 'Une vue utile, à votre façon.' : 'A useful view, your way.'}</h2></div>
+  <div class="persona-grid">
+    {paths.map((path, i) => <a class:list={['persona-card', i === 2 && 'persona-card--travel']} href={`${routeFor('features', locale)}#${['data', 'interfaces', 'travel'][i]}`}>
+      <span class="persona-number">{path.n}</span><h3>{path.title}</h3><p>{path.text}</p><span class="text-link">{path.label}<span aria-hidden="true"> →</span></span>
+    </a>)}
+  </div>
+</section>

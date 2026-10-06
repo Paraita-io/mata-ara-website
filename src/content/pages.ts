@@ -10,15 +10,15 @@ export const pages = {
   home: {
     id: 'home',
     localized: {
-      fr: { slug: '', nav: 'Accueil', title: 'Mata Ara — Comprenez votre consommation réseau', description: 'Suivez votre consommation de données mobiles et l’activité des interfaces réseau de votre appareil.' },
-      en: { slug: '', nav: 'Home', title: 'Mata Ara — Understand your network usage', description: 'Track mobile data usage and network interface activity on your device.' },
+      fr: { slug: '', nav: 'Accueil', title: 'Mata Ara — Votre réseau, en clair', description: 'Suivez votre forfait mobile, observez l’activité réseau de votre appareil et gardez un œil sur votre enveloppe en voyage.' },
+      en: { slug: '', nav: 'Home', title: 'Mata Ara — Your network, made clear', description: 'Track your mobile plan, explore network activity on your device, and keep an eye on your allowance while travelling.' },
     },
   },
   features: {
     id: 'features',
     localized: {
-      fr: { slug: 'fonctionnalites', nav: 'Fonctionnalités', title: 'Fonctionnalités — Mata Ara', description: 'Découvrez les outils Mata Ara pour suivre les données mobiles et observer les interfaces réseau.' },
-      en: { slug: 'features', nav: 'Features', title: 'Features — Mata Ara', description: 'Explore Mata Ara tools for tracking mobile data and monitoring network interfaces.' },
+      fr: { slug: 'fonctionnalites', nav: 'Fonctionnalités', title: 'Fonctionnalités — Mata Ara', description: 'Du suivi de forfait aux compteurs réseau, découvrez une vue claire de votre consommation.' },
+      en: { slug: 'features', nav: 'Features', title: 'Features — Mata Ara', description: 'From plan tracking to network counters, get a clearer view of your usage.' },
     },
   },
   privacy: {

@@ -1,0 +1,7 @@
+---
+import { site } from '../config/site';
+import type { Locale } from '../content/pages';
+const { locale, compact = false } = Astro.props as { locale: Locale; compact?: boolean };
+const label = locale === 'fr' ? 'Voir sur l’App Store' : 'View on the App Store';
+---
+{site.releaseCtaEnabled && <a class:list={['button-link', 'app-store-link', compact && 'app-store-link--compact']} href={site.appStoreUrl} rel="external">{label}<span aria-hidden="true"> ↗</span></a>}

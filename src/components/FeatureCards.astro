@@ -1,0 +1,33 @@
+---
+import type { Locale } from '../content/pages';
+const { locale } = Astro.props as { locale: Locale };
+const fr = locale === 'fr';
+const groups = fr ? [
+  { id: 'data', no: '01', title: 'Suivez votre enveloppe mobile', intro: 'Une lecture simple de votre forfait et de son évolution.', bullets: ['Consommation cellulaire et volume restant sur votre quota configuré.', 'Débits et activité en envoi et en réception, selon les compteurs de l’appareil.', 'Début du cycle de facturation mensuel personnalisable.', 'Historique horaire et journalier, avec des graphiques sur 24 h, 7 jours, 1 mois et 3 mois.'] },
+  { id: 'interfaces', no: '02', title: 'Observez les interfaces réseau', intro: 'Regardez les compteurs par interface pour mieux comprendre l’activité de l’appareil.', bullets: ['Activité et vitesses en envoi et en réception, classées par familles d’interfaces.', 'La classification est heuristique et dépend de l’appareil et de sa configuration.', 'Les interfaces « en* » sont classées par défaut comme Wi‑Fi; Ethernet ne peut pas être distingué sur tous les appareils. Les familles « bridge » peuvent aussi être ambiguës.', 'Mata Ara lit les compteurs par interface, pas le trafic de chaque app.'] },
+  { id: 'travel', no: '03', title: 'Gardez le cap pendant un voyage', intro: 'Configurez vous-même une enveloppe qui correspond à votre forfait temporaire.', bullets: ['Choisissez un quota à durée fixe et sa date d’expiration.', 'Suivez l’usage cellulaire pendant le séjour et réajustez les compteurs avec le recalibrage si nécessaire.', 'Recevez une notification locale lorsque le forfait configuré expire dans les 24 heures.', 'Mata Ara ne détecte pas les profils eSIM et ne lit pas les données de facturation de l’opérateur. Les compteurs de l’appareil peuvent différer du total opérateur.'] },
+] : [
+  { id: 'data', no: '01', title: 'Keep track of your mobile allowance', intro: 'A straightforward view of your plan and how it changes.', bullets: ['Cellular usage and remaining amount against the quota you configure.', 'Upload and download activity and speed, based on device counters.', 'A configurable monthly billing-cycle start date.', 'Hourly and daily history, with charts for 24 hours, 7 days, 1 month, and 3 months.'] },
+  { id: 'interfaces', no: '02', title: 'Explore network interfaces', intro: 'View counters by interface to better understand activity on your device.', bullets: ['Upload and download activity and speeds, grouped into interface families.', 'Classification is heuristic and depends on the device and its setup.', '“en*” interfaces default to Wi‑Fi; Ethernet cannot be distinguished on every device. “bridge” families can also be ambiguous.', 'Mata Ara reads counters by interface, not per-app traffic.'] },
+  { id: 'travel', no: '03', title: 'Stay on top of usage while travelling', intro: 'Set an allowance yourself to match your temporary travel plan.', bullets: ['Choose a fixed-period quota and its expiry date.', 'Monitor cellular use during the trip and recalibrate the counters if needed.', 'Get a local notification when your configured plan is due to expire within 24 hours.', 'Mata Ara does not detect eSIM profiles or read carrier billing data. Device counters can differ from your carrier’s total.'] },
+];
+const tools = fr ? [
+  { title: 'Des alertes à votre rythme', text: 'Notifications locales aux seuils de quota de 50 %, 75 %, 90 % et 100 %, alerte de débit, rappel d’expiration et signalement d’une consommation inhabituelle.' },
+  { title: 'Un aperçu au poignet et sur l’écran d’accueil', text: 'Une app compagnon Apple Watch et un widget d’écran d’accueil configurable complètent le suivi.' },
+  { title: 'Un déverrouillage intégral, en une fois', text: 'L’app propose un achat unique pour déverrouiller la version complète. Consultez l’App Store pour les détails de disponibilité.' },
+] : [
+  { title: 'Alerts on your terms', text: 'Local notifications at 50%, 75%, 90%, and 100% of your quota, plus a rate warning, expiry reminder, and unusual-usage alert.' },
+  { title: 'A glance from your wrist or Home Screen', text: 'An Apple Watch companion and a configurable Home Screen widget extend your tracking.' },
+  { title: 'One-time full-version unlock', text: 'The app offers a one-time purchase to unlock the full version. See the App Store for availability details.' },
+];
+---
+<div class="feature-page">
+  <div class="container feature-groups">
+    {groups.map((group) => <section class="feature-story" id={group.id} aria-labelledby={`${group.id}-title`}>
+      <div class="feature-story-heading"><span class="feature-index">{group.no}</span><p class="eyebrow">{fr ? 'Votre usage' : 'Your use'}</p><h2 id={`${group.id}-title`}>{group.title}</h2><p class="lead">{group.intro}</p></div>
+      <ul class="feature-list">{group.bullets.map((bullet) => <li>{bullet}</li>)}</ul>
+    </section>)}
+  </div>
+  <section class="container tool-section" aria-labelledby="tool-title"><div class="section-heading"><p class="eyebrow">{fr ? 'Au quotidien' : 'Everyday tools'}</p><h2 id="tool-title">{fr ? 'Les détails qui font la différence.' : 'The details that make a difference.'}</h2></div><div class="tool-grid">{tools.map((tool) => <article class="tool-card"><h3>{tool.title}</h3><p>{tool.text}</p></article>)}</div></section>
+  <aside class="container measurement-note"><p><strong>{fr ? 'À garder en tête' : 'A note on measurements'}</strong> — {fr ? 'Mata Ara présente les compteurs fournis par l’appareil. Le classement des interfaces et les totaux peuvent varier selon le matériel, iOS et la configuration réseau; ils peuvent différer de la mesure de votre opérateur.' : 'Mata Ara presents counters supplied by the device. Interface classification and totals can vary with hardware, iOS, and network setup, and may differ from your carrier’s measurement.'}</p></aside>
+</div>

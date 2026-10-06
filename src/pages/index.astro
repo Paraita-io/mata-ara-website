@@ -1,13 +1,17 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { routeFor } from '../content/pages';
+import PersonaPaths from '../components/PersonaPaths.astro';
+import AppStoreLink from '../components/AppStoreLink.astro';
 ---
 <SiteLayout locale="fr" pageId="home">
   <section class="container home-hero">
-    <p class="eyebrow">Mata Ara</p>
-    <h1>Suivez vos données. Comprenez votre réseau.</h1>
-    <p class="lead">Mata Ara vous aide à suivre votre consommation mobile et à observer l’activité réseau de votre appareil.</p>
-    <p><a class="button-link" href={routeFor('home', 'fr')}>Découvrir Mata Ara</a></p>
-    <p class="home-language"><a href={routeFor('home', 'en')} lang="en">English version</a></p>
+    <p class="eyebrow">Mata Ara <span aria-hidden="true">/</span> Suivi réseau</p>
+    <h1>Votre réseau, en clair.</h1>
+    <p class="lead">Suivez votre enveloppe mobile, observez les compteurs réseau de votre appareil et gardez le cap sur un forfait de voyage.</p>
+    <AppStoreLink locale="fr" />
   </section>
+  <PersonaPaths locale="fr" />
+  <section class="container home-detail"><div><p class="eyebrow">Les essentiels</p><h2>Des compteurs clairs, des choix qui restent les vôtres.</h2></div><p>Configurez votre quota et votre cycle, choisissez vos alertes, puis consultez l’historique quand vous en avez besoin. Un achat unique permet de déverrouiller la version complète.<br/><a href={routeFor('features', 'fr')}>Explorer toutes les fonctionnalités <span aria-hidden="true">→</span></a></p></section>
+  <p class="container home-language"><a href={routeFor('home', 'en')} lang="en">English version</a></p>
 </SiteLayout>
