@@ -147,6 +147,7 @@ select {
 .app-store-link { display: inline-flex; width: fit-content; align-items: center; gap: .6rem; margin-top: var(--space-4); background: var(--color-brand); color: var(--color-white); box-shadow: none; }
 .app-store-link:hover { background: var(--color-brand-strong); color: var(--color-white); }
 .app-store-link--compact { padding: .65rem 1rem; }
+.release-note { width: fit-content; margin-top: var(--space-4); padding: .7rem 1rem; border: 1px solid var(--color-border); border-radius: var(--radius-sm); color: var(--color-ink-soft); font-size: var(--font-size-sm); }
 .hero-art { position: relative; display: grid; min-height: 22rem; place-items: center; overflow: hidden; border-radius: 48% 52% 45% 55% / 52% 43% 57% 48%; background: radial-gradient(circle at center, #fff 0 22%, #dfece6 23% 45%, #edf2e8 46% 70%, transparent 71%); }
 .network-orbit { position: absolute; width: 78%; aspect-ratio: 1; border: 1px solid rgb(29 112 99 / 25%); border-radius: 50%; transform: rotate(-25deg) scaleY(.55); }
 .orbit-two { width: 64%; transform: rotate(28deg) scaleY(.6); border-color: rgb(29 112 99 / 40%); }
