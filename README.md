@@ -47,6 +47,18 @@ Routes use explicit `/fr/` and `/en/` locale prefixes, including the default Fre
 
 Before publishing, confirm the production domain and `/privacy` compatibility URL, the App Store product record, current App Store privacy answers, ad/ATT release configuration, privacy wording, and publisher/legal details. App Store Connect support and privacy URLs should target the final localized pages.
 
+### App Store Connect URL mapping
+
+Use the final public HTTPS origin after hosting is configured:
+
+| App Store Connect field | URL |
+| --- | --- |
+| Marketing URL | `https://<production-domain>/en` (or `/fr`) |
+| Support URL | `https://<production-domain>/en/support` (or `/fr/assistance`) |
+| Privacy Policy URL | `https://<production-domain>/privacy` (compatibility route used by the current app), or the localized `/fr/confidentialite` / `/en/privacy` page |
+
+The bracketed production domain is a release input, not a literal URL. Set `SITE_URL` to that HTTPS origin when building for production. The build then emits `sitemap.xml` with only the 14 canonical localized pages and adds its absolute URL to `robots.txt`. Without `SITE_URL`, the build omits the sitemap and uses a host-independent `robots.txt`; it does not guess a production domain. Canonical and social-preview absolute URLs are likewise omitted until the origin is configured.
+
 ### Privacy and App Store release checklist
 
 - Replace the Google sample AdMob application and ad-unit identifiers with the release identifiers, and verify which Google Mobile Ads features and data collection are active in the submitted build.

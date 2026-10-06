@@ -38,8 +38,8 @@ export const pages = {
   contact: {
     id: 'contact',
     localized: {
-      fr: { slug: 'contact', nav: 'Contact', title: 'Contact — Mata Ara', description: 'Contacter l’équipe Mata Ara.' },
-      en: { slug: 'contact', nav: 'Contact', title: 'Contact — Mata Ara', description: 'Contact the Mata Ara team.' },
+      fr: { slug: 'contact', nav: 'Contact', title: 'Nous contacter — Mata Ara', description: 'Contacter l’équipe Mata Ara.' },
+      en: { slug: 'contact', nav: 'Contact', title: 'Contact us — Mata Ara', description: 'Contact the Mata Ara team.' },
     },
   },
   press: {
