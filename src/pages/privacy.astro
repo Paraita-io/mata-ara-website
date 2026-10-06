@@ -1,17 +1,13 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
-import LanguageSwitch from '../components/LanguageSwitch.astro';
-import { site } from '../config/site';
+import PrivacyPolicy from '../components/PrivacyPolicy.astro';
 import { routeFor } from '../content/pages';
 ---
 <SiteLayout locale="fr" pageId="privacy">
-  <article class="container prose page-content">
+  <section class="container page-intro">
     <p class="eyebrow">Mata Ara</p>
     <h1>Politique de confidentialité</h1>
-    <p>Cette page est l’adresse historique de confidentialité utilisée par l’application. Consultez la politique localisée, disponible en français et en anglais.</p>
-    <p><a href={routeFor('privacy', 'fr')}>Lire la politique de confidentialité en français</a></p>
-    <p><a href={routeFor('privacy', 'en')} lang="en">Read the privacy policy in English</a></p>
-    <p>Pour toute question relative à la confidentialité, écrivez à <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>.</p>
-    <LanguageSwitch locale="fr" pageId="privacy" />
-  </article>
+    <p class="lead">Cette adresse est utilisée par l’application et affiche la politique en français. <a href={routeFor('privacy', 'en')} lang="en">Read this privacy policy in English</a>.</p>
+  </section>
+  <PrivacyPolicy locale="fr" />
 </SiteLayout>

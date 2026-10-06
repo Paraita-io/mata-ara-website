@@ -1,0 +1,78 @@
+---
+import type { Locale } from '../content/pages';
+
+const { locale } = Astro.props as { locale: Locale };
+const fr = locale === 'fr';
+---
+
+<article class="container prose page-content privacy-policy">
+  <p class="eyebrow">{fr ? 'Dernière mise à jour : 6 octobre 2026' : 'Last updated: 6 October 2026'}</p>
+
+  {fr ? (
+    <>
+      <p>Cette politique explique quelles données sont utilisées par Mata Ara, à quoi elles servent, comment elles sont partagées et quels choix vous avez. Elle s’applique à l’application iOS, à son app compagnon Apple Watch et à son widget, ainsi qu’au présent site.</p>
+
+      <h2>Les données de suivi restent sur vos appareils</h2>
+      <p>Mata Ara lit les compteurs de trafic réseau que le système iOS rend disponibles sur l’appareil. Pour afficher votre consommation et ses graphiques, l’application conserve localement des totaux de données envoyées et reçues, des relevés historiques et les réglages que vous choisissez : interfaces affichées, noms et ordre, enveloppe, période et date d’expiration éventuelle, et préférences de notification. Il ne s’agit pas d’un relevé détaillé du trafic par application.</p>
+      <p>Ces informations sont enregistrées dans le stockage local de l’appareil. Le code de l’application ne crée pas de compte Mata Ara et n’envoie pas ces compteurs, réglages ou relevés à un serveur Mata Ara. Les notifications de consommation sont des notifications locales programmées par l’application.</p>
+
+      <h2>Partage avec le widget et l’Apple Watch</h2>
+      <p>Le widget partage un stockage de l’app avec Mata Ara sur l’appareil. Si l’app Apple Watch est installée et associée, Mata Ara lui transmet les catégories d’interfaces, le total consommé, le quota configuré et l’heure de dernière actualisation via les mécanismes Apple Watch Connectivity. Une transmission peut être mise en attente lorsque la Watch n’est pas disponible. Ces fonctions servent à afficher les compteurs sur vos appareils Apple ; elles ne constituent pas une sauvegarde Mata Ara sur un serveur.</p>
+
+      <h2>Historique et durée de conservation</h2>
+      <p>Mata Ara conserve les relevés horaires jusqu’à 48 heures et les relevés quotidiens jusqu’à 93 jours. Ils alimentent les graphiques qui peuvent afficher jusqu’à 90 jours. L’application supprime les relevés anciens lors de ses opérations de maintenance ; si iOS ne lance pas l’app pendant un certain temps, le nettoyage peut attendre une prochaine actualisation.</p>
+      <p>Dans les options, vous pouvez masquer ou réorganiser des interfaces, recalibrer un compteur, modifier ou retirer la configuration d’une interface. Le retrait d’une interface efface ses réglages et son total courant, mais ne supprime pas ses relevés historiques déjà enregistrés : ceux-ci expirent selon les durées indiquées ci-dessus. L’application ne propose pas actuellement une commande permettant d’effacer immédiatement tout l’historique. Mata Ara ne peut pas accéder à distance aux données présentes uniquement sur votre appareil. La suppression de l’app et la gestion de ses données locales relèvent des contrôles d’iOS ; les sauvegardes ou copies gérées par Apple sont soumises aux services Apple.</p>
+
+      <h2>Achats intégrés</h2>
+      <p>L’achat et la restauration de l’accès aux fonctionnalités complètes passent par StoreKit et l’App Store d’Apple. Apple traite le paiement avec le compte Apple utilisé pour l’achat. Mata Ara utilise les informations de transaction fournies par StoreKit pour vérifier et rétablir l’accès dans l’app ; le code de l’app ne met pas en place de compte de paiement Mata Ara. Consultez la <a href="https://www.apple.com/legal/privacy/" rel="external">politique de confidentialité d’Apple</a> pour en savoir plus sur les données traitées par Apple.</p>
+
+      <h2>Publicité, Google Mobile Ads et choix ATT</h2>
+      <p>Le code actuel intègre le SDK Google Mobile Ads. La bannière publicitaire de l’écran principal s’affiche uniquement lorsque l’autorisation de suivi iOS est accordée et que l’accès complet n’a pas été acheté. La demande App Tracking Transparency (ATT) d’Apple concerne le suivi de l’activité entre les apps, sites ou services d’autres entreprises, notamment pour la publicité ou la mesure. Refuser cette autorisation ne désactive pas les compteurs réseau locaux de Mata Ara.</p>
+      <p>Selon la configuration du SDK, les appareils, la région et les choix de l’utilisateur, Google peut traiter des informations telles que l’adresse IP, des identifiants d’appareil ou publicitaires, des interactions avec les annonces, ainsi que des données de diagnostic ou de performance. Ces catégories sont décrites par Google et peuvent évoluer ; consultez la <a href="https://developers.google.com/admob/ios/privacy/data-disclosure" rel="external">documentation Google sur les données déclarées pour AdMob sur iOS</a> et les <a href="https://policies.google.com/privacy" rel="external">règles de confidentialité de Google</a>. Vous pouvez modifier votre autorisation ATT dans Réglages iOS &gt; Confidentialité et sécurité &gt; Suivi.</p>
+      <p>Les identifiants AdMob présents dans le code source actuel sont des identifiants de test Google. Avant la sortie, la configuration publicitaire et les réponses de confidentialité de l’App Store doivent être vérifiées et cette politique mise à jour si nécessaire. La présence d’une dépendance Google User Messaging Platform (UMP) dans le projet ne signifie pas qu’un parcours de consentement UMP est actuellement intégré à l’app.</p>
+
+      <h2>Le site et les messages que vous nous adressez</h2>
+      <p>Ce site est généré en pages statiques. Son code ne contient ni formulaire, ni outil d’analyse d’audience, ni cookie publicitaire. L’hébergeur du site peut traiter des données techniques nécessaires pour fournir et sécuriser les pages, selon la configuration retenue au déploiement.</p>
+      <p>Si vous nous écrivez, nous recevons votre adresse e-mail et le contenu de votre message afin d’y répondre et de traiter votre demande. Le service de messagerie utilisé pour recevoir le courriel peut aussi traiter ces informations selon ses propres règles. N’envoyez pas de mot de passe, reçu d’achat, journaux réseau ou autre donnée sensible qui n’est pas nécessaire. Nous conservons les échanges le temps de répondre et d’assurer le suivi nécessaire, puis les supprimons lorsque nous n’en avons plus besoin, sous réserve d’obligations légales applicables.</p>
+
+      <h2>Vos choix et vos demandes</h2>
+      <p>Vous pouvez refuser ou retirer l’autorisation ATT dans les réglages iOS. Vous pouvez aussi gérer les notifications de Mata Ara dans Réglages iOS et modifier les réglages de quota et d’interface dans l’app. Les relevés historiques expirent automatiquement selon les durées ci-dessus ; le retrait d’une interface ne les efface pas immédiatement. Pour toute question sur cette politique ou une demande relative à la confidentialité, contactez <a href="mailto:paraita@paraita.io">paraita@paraita.io</a>. Nous ne pouvons pas effacer à distance les données locales de votre appareil.</p>
+
+      <h2>Évolution de cette politique</h2>
+      <p>Cette politique pourra être révisée si l’application, ses SDK ou ses pratiques de données changent. La date en haut de cette page indique la dernière mise à jour publiée. En cas de changement important, l’information sera portée à votre connaissance par un moyen adapté à la modification.</p>
+    </>
+  ) : (
+    <>
+      <p>This policy explains what data Mata Ara uses, why it is used, how it is shared, and the choices available to you. It applies to the iOS app, its Apple Watch companion and widget, and this website.</p>
+
+      <h2>Usage tracking stays on your devices</h2>
+      <p>Mata Ara reads the network traffic counters that iOS makes available on the device. To show usage and charts, the app stores totals for data sent and received, historical snapshots, and the settings you choose: visible interfaces, names and order, allowance, period and any expiry date, and notification preferences. This is not a per-app traffic breakdown.</p>
+      <p>This information is stored locally on the device. The app code does not create a Mata Ara account or send these counters, settings, or snapshots to a Mata Ara server. Usage alerts are local notifications scheduled by the app.</p>
+
+      <h2>Sharing with the widget and Apple Watch</h2>
+      <p>The widget shares the app’s on-device storage with Mata Ara. If the Apple Watch app is installed and paired, Mata Ara sends interface categories, usage totals, configured quotas, and the last update time to it through Apple Watch Connectivity. A transfer may be queued while the Watch is unavailable. These features display counters across your Apple devices; they do not create a Mata Ara server backup.</p>
+
+      <h2>History and retention</h2>
+      <p>Mata Ara retains hourly snapshots for up to 48 hours and daily snapshots for up to 93 days. They support charts that can display up to 90 days. The app removes old snapshots during maintenance; if iOS does not run the app for a while, cleanup may wait until a later refresh.</p>
+      <p>In the app options, you can hide or reorder interfaces, recalibrate a counter, and change or remove an interface configuration. Removing an interface deletes its settings and current total, but does not delete historical snapshots already recorded for it; those expire according to the periods above. The app does not currently offer a command to immediately erase all history. Mata Ara cannot remotely access data stored only on your device. Removing the app and managing its local data are controlled by iOS; backups or copies managed by Apple are subject to Apple’s services.</p>
+
+      <h2>In-app purchases</h2>
+      <p>Purchasing and restoring access to full features uses StoreKit and Apple’s App Store. Apple processes payment through the Apple Account used for the purchase. Mata Ara uses transaction information provided by StoreKit to verify and restore access in the app; the app code does not create a Mata Ara payment account. See <a href="https://www.apple.com/legal/privacy/" rel="external">Apple’s privacy policy</a> for more about Apple’s data practices.</p>
+
+      <h2>Advertising, Google Mobile Ads, and ATT choices</h2>
+      <p>The current code integrates the Google Mobile Ads SDK. The main-screen advertising banner appears only when iOS tracking permission is authorized and full access has not been purchased. Apple’s App Tracking Transparency (ATT) request concerns tracking activity across other companies’ apps, websites, or services, including for advertising or measurement. Declining permission does not disable Mata Ara’s local network counters.</p>
+      <p>Depending on SDK configuration, device, region, and user choices, Google may process information such as IP address, device or advertising identifiers, ad interactions, and diagnostic or performance data. Google describes these categories and may update them; see <a href="https://developers.google.com/admob/ios/privacy/data-disclosure" rel="external">Google’s iOS AdMob data disclosure documentation</a> and <a href="https://policies.google.com/privacy" rel="external">Google’s privacy policy</a>. You can change ATT permission in iOS Settings &gt; Privacy &amp; Security &gt; Tracking.</p>
+      <p>The AdMob identifiers in the current source code are Google test identifiers. Before release, the advertising configuration and App Store privacy answers must be verified, and this policy updated if needed. The presence of the Google User Messaging Platform (UMP) dependency in the project does not mean that a UMP consent flow is currently integrated in the app.</p>
+
+      <h2>This website and messages you send us</h2>
+      <p>This website is generated as static pages. Its code has no form, audience analytics, or advertising cookies. The site host may process technical data needed to deliver and secure the pages, depending on the deployment configuration.</p>
+      <p>If you email us, we receive your email address and message contents so we can respond and handle your request. The email service used to receive your message may also process this information under its own terms. Do not include passwords, purchase receipts, network logs, or other sensitive data that is not necessary. We keep messages while responding and following up as needed, then delete them when no longer needed, subject to applicable legal obligations.</p>
+
+      <h2>Your choices and requests</h2>
+      <p>You can decline or withdraw ATT permission in iOS Settings. You can also manage Mata Ara notifications in iOS Settings and change quota and interface settings in the app. Historical snapshots expire under the periods above; removing an interface does not erase them immediately. For questions about this policy or privacy requests, contact <a href="mailto:paraita@paraita.io">paraita@paraita.io</a>. We cannot remotely erase local data from your device.</p>
+
+      <h2>Changes to this policy</h2>
+      <p>This policy may be revised if the app, its SDKs, or its data practices change. The date at the top of this page shows when it was last published. If a material change occurs, we will communicate it through an appropriate channel for the change.</p>
+    </>
+  )}
+</article>

@@ -3,6 +3,8 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 import { allPageEntries, pages, type Locale, type PageId } from '../../content/pages';
 import FeatureCards from '../../components/FeatureCards.astro';
 import SupportFAQ from '../../components/SupportFAQ.astro';
+import PrivacyPolicy from '../../components/PrivacyPolicy.astro';
+import ContactDetails from '../../components/ContactDetails.astro';
 export function getStaticPaths() {
   return allPageEntries().filter(({ slug }) => slug.length > 0)
     .map(({ id, locale, slug }) => ({ params: { locale, page: slug }, props: { id, locale } }));
@@ -18,5 +20,7 @@ const page = pages[id].localized[locale];
   </section>
   {id === 'features' && <FeatureCards locale={locale} />}
   {id === 'support' && <SupportFAQ locale={locale} />}
+  {id === 'privacy' && <PrivacyPolicy locale={locale} />}
+  {id === 'contact' && <ContactDetails locale={locale} />}
   <slot />
 </SiteLayout>

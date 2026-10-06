@@ -1,0 +1,20 @@
+---
+import type { Locale } from '../content/pages';
+import { site } from '../config/site';
+
+const { locale } = Astro.props as { locale: Locale };
+const fr = locale === 'fr';
+---
+
+<section class="container prose page-content" aria-labelledby="contact-heading">
+  <h2 id="contact-heading">{fr ? 'Nous contacter' : 'Get in touch'}</h2>
+  <p>{fr ? 'Pour toute question concernant Mata Ara, son utilisation, votre confidentialité, une demande de presse ou une proposition professionnelle, vous pouvez nous écrire à :' : 'For questions about Mata Ara, help using the app, privacy requests, press enquiries, or business proposals, email us at:'}</p>
+  <p class="contact-email"><a class="button-link app-store-link" href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a></p>
+  <h2>{fr ? 'Pour une demande d’assistance' : 'For support requests'}</h2>
+  <p>{fr ? 'Décrivez le problème et indiquez, si possible, le modèle de votre appareil, la version d’iOS, la version de Mata Ara et les étapes pour le reproduire. N’incluez pas de mot de passe, reçu d’achat, journal réseau ni donnée personnelle qui ne soit pas nécessaire.' : 'Describe the issue and, if possible, include your device model, iOS version, Mata Ara version, and the steps to reproduce it. Do not include passwords, purchase receipts, network logs, or unnecessary personal information.'}</p>
+  <p>{fr ? 'Nous utilisons les informations de votre message uniquement pour vous répondre et traiter votre demande, conformément à notre politique de confidentialité.' : 'We use the information in your message to respond and handle your request, as described in our privacy policy.'}</p>
+</section>
+
+<style>
+  .contact-email { margin-block: var(--space-6) var(--space-12); }
+</style>
