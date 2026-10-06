@@ -1,0 +1,31 @@
+---
+import type { Locale } from '../content/pages';
+import { site } from '../config/site';
+import { routeFor } from '../content/pages';
+
+const { locale } = Astro.props as { locale: Locale };
+const fr = locale === 'fr';
+---
+
+<section class="container prose page-content legal-content" aria-labelledby="legal-heading">
+  <h2 id="legal-heading">{fr ? 'À propos de Mata Ara' : 'About Mata Ara'}</h2>
+  <p>{fr
+    ? 'Mata Ara est le nom de l’application et du projet présenté sur ce site. Pour toute question concernant le site ou l’application, vous pouvez contacter le responsable du projet à l’adresse ci-dessous.'
+    : 'Mata Ara is the name of the app and project presented on this website. For questions about the website or the app, contact the project owner using the address below.'}</p>
+  <h2>{fr ? 'Contact' : 'Contact'}</h2>
+  <p><a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a></p>
+  <h2>{fr ? 'Confidentialité' : 'Privacy'}</h2>
+  <p>{fr
+    ? <>La politique de confidentialité décrit les traitements associés à l’application et les coordonnées pour les demandes relatives aux données. Consultez la <a href={routeFor('privacy', locale)}>politique de confidentialité</a> ou la page <a href={routeFor('support', locale)}>assistance</a>.</>
+    : <>The privacy policy describes data handling associated with the app and how to make privacy enquiries. Read the <a href={routeFor('privacy', locale)}>privacy policy</a> or visit <a href={routeFor('support', locale)}>support</a>.</>}</p>
+  <aside class="legal-notice">
+    <p>{fr
+      ? 'Avant la mise en ligne officielle, l’identité juridique complète de l’éditeur, la juridiction applicable et les éventuelles mentions relatives à l’hébergement doivent être confirmées et ajoutées ici.'
+      : 'Before the official launch, the publisher’s full legal identity, applicable jurisdiction, and any required hosting disclosures must be confirmed and added here.'}</p>
+  </aside>
+</section>
+
+<style>
+  .legal-notice { margin-top: var(--space-8); padding: var(--space-6); border-left: 4px solid var(--color-brand); background: var(--color-surface-muted); color: var(--color-ink-soft); }
+  .legal-notice p { margin: 0; }
+</style>

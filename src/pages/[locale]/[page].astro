@@ -5,6 +5,8 @@ import FeatureCards from '../../components/FeatureCards.astro';
 import SupportFAQ from '../../components/SupportFAQ.astro';
 import PrivacyPolicy from '../../components/PrivacyPolicy.astro';
 import ContactDetails from '../../components/ContactDetails.astro';
+import LegalInfo from '../../components/LegalInfo.astro';
+import PressKit from '../../components/PressKit.astro';
 export function getStaticPaths() {
   return allPageEntries().filter(({ slug }) => slug.length > 0)
     .map(({ id, locale, slug }) => ({ params: { locale, page: slug }, props: { id, locale } }));
@@ -22,5 +24,7 @@ const page = pages[id].localized[locale];
   {id === 'support' && <SupportFAQ locale={locale} />}
   {id === 'privacy' && <PrivacyPolicy locale={locale} />}
   {id === 'contact' && <ContactDetails locale={locale} />}
+  {id === 'legal' && <LegalInfo locale={locale} />}
+  {id === 'press' && <PressKit locale={locale} />}
   <slot />
 </SiteLayout>

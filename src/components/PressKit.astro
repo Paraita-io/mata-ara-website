@@ -1,0 +1,88 @@
+---
+import type { Locale } from '../content/pages';
+import { site } from '../config/site';
+import AppStoreLink from './AppStoreLink.astro';
+import { routeFor } from '../content/pages';
+
+const { locale } = Astro.props as { locale: Locale };
+const fr = locale === 'fr';
+---
+
+<section class="container prose page-content press-content" aria-labelledby="press-boilerplate-heading">
+  <div class="press-boilerplate">
+    <p class="eyebrow">{fr ? 'Présentation courte' : 'Short description'}</p>
+    <h2 id="press-boilerplate-heading">{fr ? 'À propos de Mata Ara' : 'About Mata Ara'}</h2>
+    <p>{fr
+      ? 'Mata Ara aide à suivre la consommation de données mobiles et à observer l’activité réseau de son appareil. L’application propose aussi de définir une enveloppe et une date de fin pour surveiller un forfait temporaire, par exemple pendant un voyage.'
+      : 'Mata Ara helps people track mobile data use and explore network activity on their device. It also lets people set an allowance and end date to monitor a temporary plan, such as during a trip.'}</p>
+  </div>
+
+  <div class="press-facts">
+    <div>
+      <h2>{fr ? 'Faits produit' : 'Product facts'}</h2>
+      <ul>
+        <li>{fr ? 'Suivi de l’usage mobile et des enveloppes définies par l’utilisateur.' : 'Mobile usage tracking and user-defined allowances.'}</li>
+        <li>{fr ? 'Compteurs d’interfaces réseau classés selon les informations disponibles sur l’appareil.' : 'Network-interface counters categorized using the information available on the device.'}</li>
+        <li>{fr ? 'Application pour iPhone avec compagnon Apple Watch.' : 'iPhone app with an Apple Watch companion.'}</li>
+        <li>{fr ? 'Application publiée sur l’App Store d’Apple.' : 'App distributed through Apple’s App Store.'}</li>
+      </ul>
+      <p class="press-caveat">{fr
+        ? 'Les compteurs de l’appareil peuvent différer des chiffres de facturation de l’opérateur. Mata Ara ne détecte pas automatiquement les profils eSIM.'
+        : 'Device counters may differ from carrier billing. Mata Ara does not automatically detect eSIM profiles.'}</p>
+    </div>
+    <div>
+      <h2>{fr ? 'Disponibilité' : 'Availability'}</h2>
+      <p>{fr
+        ? 'La fiche App Store et sa disponibilité dépendent de la configuration de sortie de la nouvelle version.'
+        : 'The App Store listing and its availability depend on the release configuration for the new version.'}</p>
+      <AppStoreLink locale={locale} />
+    </div>
+  </div>
+
+  <div class="press-assets">
+    <h2>{fr ? 'Ressources de marque' : 'Brand assets'}</h2>
+    <p>{fr
+      ? 'Ces fichiers sont les ressources Mata Ara fournies avec le projet de l’application : le symbole de marque issu des ressources graphiques v2 et l’icône marketing présente dans le catalogue d’icônes iOS.'
+      : 'These Mata Ara files come from the app project: the mark from its v2 artwork and the marketing icon from its iOS icon catalog.'}</p>
+    <div class="press-asset-grid">
+      <article class="press-asset-card">
+        <img src="/assets/mata-ara-mark.png" width="1024" height="1024" alt={fr ? 'Symbole Mata Ara sur fond transparent' : 'Mata Ara mark on a transparent background'} loading="lazy" />
+        <h3>{fr ? 'Symbole de marque · PNG · 1024 × 1024' : 'Brand mark · PNG · 1024 × 1024'}</h3>
+        <a class="button-link" href="/press-kit/mata-ara-mark-1024.png" download>{fr ? 'Télécharger le symbole' : 'Download the mark'} <span aria-hidden="true">↓</span></a>
+      </article>
+      <article class="press-asset-card">
+        <img src="/assets/mata-ara-app-icon.png" width="1024" height="1024" alt={fr ? 'Icône de l’application Mata Ara' : 'Mata Ara app icon'} loading="lazy" />
+        <h3>{fr ? 'Icône de l’application · PNG · 1024 × 1024' : 'App icon · PNG · 1024 × 1024'}</h3>
+        <a class="button-link" href="/press-kit/mata-ara-app-icon-1024.png" download>{fr ? 'Télécharger l’icône' : 'Download the app icon'} <span aria-hidden="true">↓</span></a>
+      </article>
+    </div>
+    <p class="press-terms">{fr
+      ? 'Les fichiers sont proposés pour consultation et préparation éditoriale. Leur téléchargement ne vaut pas autorisation de reproduction, modification, redistribution ou d’usage commercial. Pour toute publication ou réutilisation, demandez une autorisation à '
+      : 'Files are provided for review and editorial preparation. Downloading them does not grant permission to reproduce, modify, redistribute, or use them commercially. Request permission before publication or reuse at '}
+      <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>.</p>
+  </div>
+
+  <div class="press-contact">
+    <h2>{fr ? 'Presse et demandes professionnelles' : 'Press and business enquiries'}</h2>
+    <p>{fr ? 'Pour une demande de presse, une précision factuelle ou une autorisation d’utilisation des ressources :' : 'For press enquiries, factual clarification, or permission to use these assets:'} <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>.</p>
+    <p><a href={routeFor('privacy', locale)}>{fr ? 'Politique de confidentialité' : 'Privacy policy'}</a> · <a href={routeFor('legal', locale)}>{fr ? 'Mentions légales' : 'Legal information'}</a></p>
+  </div>
+</section>
+
+<style>
+  .press-content { max-width: 72rem; }
+  .press-boilerplate, .press-facts, .press-contact { margin-bottom: var(--space-12); }
+  .press-content h2 { font-size: var(--font-size-xl); line-height: 1.2; }
+  .press-facts { display: grid; grid-template-columns: 1.2fr .8fr; gap: var(--space-8); padding: var(--space-8); border-radius: var(--radius-lg); background: var(--color-surface-muted); }
+  .press-facts > div > :first-child { margin-top: 0; }
+  .press-facts li { margin-block: .65rem; padding-left: .25rem; }
+  .press-caveat, .press-terms { color: var(--color-ink-soft); font-size: var(--font-size-sm); }
+  .press-assets { margin-bottom: var(--space-12); }
+  .press-asset-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6); margin-block: var(--space-6); }
+  .press-asset-card { display: flex; flex-direction: column; align-items: flex-start; padding: var(--space-6); border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); }
+  .press-asset-card img { width: min(100%, 18rem); align-self: center; aspect-ratio: 1; object-fit: contain; }
+  .press-asset-card h3 { margin-block: var(--space-4); font-size: 1rem; }
+  .press-asset-card .button-link { display: inline-flex; gap: .6rem; align-items: center; box-shadow: none; }
+  .press-terms { padding: var(--space-4); border-left: 3px solid var(--color-brand); background: var(--color-surface-muted); }
+  @media (max-width: 48rem) { .press-facts, .press-asset-grid { grid-template-columns: 1fr; } }
+</style>

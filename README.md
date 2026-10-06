@@ -53,4 +53,6 @@ Before publishing, confirm the production domain and `/privacy` compatibility UR
 - Verify the ATT prompt text/timing and the ads behavior for both authorized and denied states. Confirm and implement any consent flow required for the release markets; the current app source includes the Google UMP package but no UMP consent flow was found in the app code.
 - Reconcile the policy with the final SDK configuration and submit accurate App Store Connect App Privacy answers, including data collected by Google Mobile Ads and any Apple purchase processing disclosures.
 - Confirm the legal publisher/controller name and any required publisher, jurisdiction, and hosting disclosures before publishing the legal pages and privacy policy.
+- Replace the legal-information notice on both `/fr/mentions-legales` and `/en/legal` with the verified publisher identity and any disclosures required for the publisher's jurisdiction. Do not launch with the notice still stating that these details are pending.
+- Confirm the Mata Ara mark and app-icon permissions for every intended press use; the press-kit downloads are supplied for review and editorial preparation and do not grant reproduction or commercial-use rights.
 - Confirm the French and English privacy policy and contact URLs are live, publicly fetchable, and match the release build before App Review.
