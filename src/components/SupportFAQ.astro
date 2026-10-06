@@ -1,0 +1,45 @@
+---
+import type { Locale } from '../content/pages';
+
+const { locale } = Astro.props as { locale: Locale };
+const fr = locale === 'fr';
+const questions = fr ? [
+  { q: 'Comment configurer mon quota mobile ?', a: 'Pendant la configuration initiale, indiquez le quota de votre forfait. Vous pouvez ensuite ouvrir Options > Recalibrer le quota pour ajuster la limite, choisir un cycle mensuel ou recalibrer votre suivi.' },
+  { q: 'Comment suivre une eSIM de voyage à durée fixe ?', a: 'Dans Options > Recalibrer le quota, choisissez une période fixe, saisissez le volume de données fourni par votre opérateur et la date d’expiration. Mata Ara suit alors le compteur cellulaire de l’appareil et peut vous avertir si le forfait fixe expire dans les 24 heures précédentes. L’eSIM et sa date ne sont pas détectées automatiquement : configurez-les vous-même.' },
+  { q: 'Pourquoi ne reçois-je pas les notifications ?', a: 'Autorisez les notifications de Mata Ara dans Réglages iOS > Notifications, puis activez les alertes souhaitées dans les options de l’app. iOS peut différer ou ne pas présenter une notification, notamment lorsque l’appareil ne lance pas son actualisation en arrière-plan. Les alertes de quota à 50 %, 75 % et 90 % nécessitent la version complète ; celle à 100 % est disponible sans cet achat.' },
+  { q: 'Pourquoi les chiffres diffèrent-ils de ceux de mon opérateur ?', a: 'Mata Ara lit les compteurs réseau disponibles sur l’appareil. La période de mesure, les règles de comptabilisation, l’arrondi ou le délai d’actualisation de l’opérateur peuvent produire un total différent. Utilisez le relevé de votre opérateur comme référence pour la facturation.' },
+  { q: 'Pourquoi une interface semble-t-elle mal identifiée ?', a: 'Mata Ara associe des noms d’interfaces système à des catégories avec des règles heuristiques qui varient selon l’appareil et iOS. Certaines interfaces peuvent être ambiguës — par exemple Wi‑Fi et Ethernet, ou partage de connexion et pont réseau. Les compteurs d’interfaces ne représentent pas le trafic détaillé par application.' },
+  { q: 'Combien de temps l’historique est-il disponible ?', a: 'L’app conserve des relevés horaires jusqu’à 48 heures et des relevés quotidiens jusqu’à 93 jours afin d’alimenter ses graphiques, dont la fenêtre visible peut aller jusqu’à 90 jours. Les relevés sont créés quand l’appareil peut actualiser ses données ; l’historique peut donc commencer à se remplir après la configuration.' },
+  { q: 'Quand la Watch et le widget se mettent-ils à jour ?', a: 'L’app partage les données avec la Watch et le widget, mais iOS et watchOS décident du moment où leurs vues sont actualisées. Ouvrez Mata Ara sur l’iPhone, puis l’app sur la Watch ou retirez et ajoutez de nouveau le widget si les données affichées ne se mettent pas à jour. Une actualisation immédiate n’est pas garantie.' },
+  { q: 'Comment restaurer mon achat ?', a: 'Dans Mata Ara, ouvrez les options et utilisez le bouton « Restore » dans la section d’achat. La restauration passe par l’App Store et nécessite le compte Apple associé à l’achat. Si l’accès n’est pas rétabli, contactez-nous en précisant que vous avez tenté une restauration ; n’envoyez pas de reçu ni d’identifiants de compte.' },
+] : [
+  { q: 'How do I set up my mobile data quota?', a: 'Enter your plan allowance during initial setup. Later, open Options > Recalibrate Quota to adjust the limit, choose a monthly cycle, or recalibrate your tracking.' },
+  { q: 'How do I track a fixed-duration travel eSIM?', a: 'In Options > Recalibrate Quota, choose a fixed period, enter the data amount provided by your carrier, and set its expiry date. Mata Ara then follows the device’s cellular counter and can alert you when the fixed plan is due to expire within the next 24 hours. It does not detect the eSIM or its expiry date automatically, so enter those details yourself.' },
+  { q: 'Why am I not receiving notifications?', a: 'Allow notifications for Mata Ara in iOS Settings > Notifications, then enable the alerts you want in the app options. iOS may delay or omit a notification, for example when the device does not run a background refresh. The 50%, 75%, and 90% quota alerts require the full version; the 100% alert is available without that purchase.' },
+  { q: 'Why do the numbers differ from my carrier?', a: 'Mata Ara reads network counters available on the device. Measurement periods, accounting rules, rounding, or carrier refresh delays can produce a different total. Use your carrier’s records as the reference for billing.' },
+  { q: 'Why is an interface classified incorrectly?', a: 'Mata Ara maps system interface names to categories using heuristics that vary by device and iOS version. Some interfaces can be ambiguous—for example Wi‑Fi versus Ethernet, or Personal Hotspot versus a network bridge. Interface counters do not show per-app traffic.' },
+  { q: 'How long is usage history available?', a: 'The app retains hourly snapshots for up to 48 hours and daily snapshots for up to 93 days to support its charts, which can show up to 90 days. Snapshots are created when the device can refresh its data, so history may take some time to build after setup.' },
+  { q: 'When do the Watch app and widget refresh?', a: 'The app shares data with the Watch and widget, but iOS and watchOS decide when their views refresh. Open Mata Ara on iPhone, then open the Watch app or remove and re-add the widget if its displayed data does not update. An immediate refresh is not guaranteed.' },
+  { q: 'How do I restore my purchase?', a: 'In Mata Ara, open the app options and use the “Restore” button in the purchase section. Restoration uses the App Store and requires the Apple Account used for the purchase. If access is not restored, contact us and mention that you tried restoring; do not send a receipt or account credentials.' },
+];
+---
+
+<section class="container support-content" aria-labelledby="faq-title">
+  <div class="section-heading">
+    <p class="eyebrow">{fr ? 'Questions fréquentes' : 'Frequently asked questions'}</p>
+    <h2 id="faq-title">{fr ? 'Besoin d’un coup de main ?' : 'Need a hand?'}</h2>
+  </div>
+  <div class="faq-list">
+    {questions.map(({ q, a }) => (
+      <details class="faq-item">
+        <summary>{q}</summary>
+        <p>{a}</p>
+      </details>
+    ))}
+  </div>
+  <aside class="support-contact">
+    <h2>{fr ? 'Écrivez-nous' : 'Get in touch'}</h2>
+    <p>{fr ? 'Pour nous aider à comprendre le problème, indiquez le modèle de votre appareil, la version d’iOS, la version de Mata Ara et les étapes pour reproduire le souci. N’incluez pas de journaux réseau, mot de passe, reçu d’achat ni autre donnée personnelle inutile.' : 'To help us understand the issue, include your device model, iOS version, Mata Ara version, and the steps to reproduce it. Do not include network logs, passwords, purchase receipts, or other unnecessary personal information.'}</p>
+    <a class="button-link app-store-link" href="mailto:paraita@paraita.io">paraita@paraita.io</a>
+  </aside>
+</section>

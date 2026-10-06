@@ -139,6 +139,15 @@ select {
 .page-content { padding-block: var(--space-12); }
 .prose { max-width: 52rem; }
 .prose h1 { line-height: 1.15; }
+.support-content { padding-block: 0 var(--space-12); }
+.faq-list { max-width: 54rem; border-top: 1px solid var(--color-border); }
+.faq-item { border-bottom: 1px solid var(--color-border); }
+.faq-item summary { padding: var(--space-4) 2.5rem var(--space-4) 0; color: var(--color-ink); font-weight: 700; cursor: pointer; }
+.faq-item summary::marker { color: var(--color-brand); }
+.faq-item p { max-width: 50rem; margin: 0; padding: 0 var(--space-4) var(--space-6) 0; color: var(--color-ink-soft); }
+.support-contact { max-width: 54rem; margin-top: var(--space-12); padding: var(--space-8); border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface-muted); }
+.support-contact h2 { margin-top: 0; font-size: var(--font-size-xl); }
+.support-contact .button-link { display: inline-flex; }
 
 .home-hero { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(16rem, .85fr); align-items: center; gap: clamp(2rem, 6vw, 6rem); max-width: 76rem; }
 .hero-copy { position: relative; z-index: 1; }
