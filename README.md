@@ -57,7 +57,7 @@ Use the final public HTTPS origin after hosting is configured:
 | Support URL | `https://<production-domain>/en/support` (or `/fr/assistance`) |
 | Privacy Policy URL | `https://<production-domain>/privacy` (compatibility route used by the current app), or the localized `/fr/confidentialite` / `/en/privacy` page |
 
-The bracketed production domain is a release input, not a literal URL. Set `SITE_URL` to that HTTPS origin when building for production. The build then emits `sitemap.xml` with only the 14 canonical localized pages and adds its absolute URL to `robots.txt`. Without `SITE_URL`, the build omits the sitemap and uses a host-independent `robots.txt`; it does not guess a production domain. Canonical and social-preview absolute URLs are likewise omitted until the origin is configured.
+The bracketed production domain is a release input, not a literal URL. Set `SITE_URL` to that HTTPS origin when building for production. The build then emits `sitemap.xml` with only the 14 canonical localized pages and adds its absolute URL to `robots.txt`. Without `SITE_URL`, the build omits the sitemap and uses a host-independent `robots.txt`; it does not guess a production domain. Canonical, social-preview and `hreflang` absolute URLs are likewise omitted until the origin is configured.
 
 ### Privacy and App Store release checklist
 
