@@ -1,13 +1,13 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
-import { type Locale } from '../../content/pages';
+import { routeFor, type Locale } from '../../content/pages';
 export function getStaticPaths() {
   return [{ params: { locale: 'fr' } }, { params: { locale: 'en' } }];
 }
 const locale = Astro.params.locale as Locale;
 const content = locale === 'fr'
-  ? { title: 'Suivez vos données. Comprenez votre réseau.', intro: 'Mata Ara vous aide à suivre votre consommation mobile et à observer l’activité réseau de votre appareil.', links: [['Suivre ma consommation', '/fr/fonctionnalites/'], ['Observer les interfaces de mon appareil', '/fr/fonctionnalites/'], ['Suivre mon forfait pendant un voyage', '/fr/fonctionnalites/']] }
-  : { title: 'Track your data. Understand your network.', intro: 'Mata Ara helps you follow mobile data usage and see network activity on your device.', links: [['Track my data usage', '/en/features/'], ['Monitor my device interfaces', '/en/features/'], ['Track a travel plan', '/en/features/']] };
+  ? { title: 'Suivez vos données. Comprenez votre réseau.', intro: 'Mata Ara vous aide à suivre votre consommation mobile et à observer l’activité réseau de votre appareil.', links: [['Suivre ma consommation', routeFor('features', 'fr')], ['Observer les interfaces de mon appareil', routeFor('features', 'fr')], ['Suivre mon forfait pendant un voyage', routeFor('features', 'fr')]] }
+  : { title: 'Track your data. Understand your network.', intro: 'Mata Ara helps you follow mobile data usage and see network activity on your device.', links: [['Track my data usage', routeFor('features', 'en')], ['Monitor my device interfaces', routeFor('features', 'en')], ['Track a travel plan', routeFor('features', 'en')]] };
 ---
 <SiteLayout locale={locale} pageId="home">
   <section class="container home-hero">
@@ -15,6 +15,6 @@ const content = locale === 'fr'
     <h1>{content.title}</h1>
     <p class="lead">{content.intro}</p>
     <ul class="audience-links">{content.links.map(([label, href]) => <li><a href={href}>{label}<span aria-hidden="true"> →</span></a></li>)}</ul>
-    <p class="home-language"><a href={locale === 'fr' ? '/en/' : '/fr/'} lang={locale === 'fr' ? 'en' : 'fr'}>{locale === 'fr' ? 'English version' : 'Version française'}</a></p>
+    <p class="home-language"><a href={routeFor('home', locale === 'fr' ? 'en' : 'fr')} lang={locale === 'fr' ? 'en' : 'fr'}>{locale === 'fr' ? 'English version' : 'Version française'}</a></p>
   </section>
 </SiteLayout>

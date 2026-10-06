@@ -7,7 +7,7 @@ const menuLabel = locale === 'fr' ? 'Navigation principale' : 'Main navigation';
 ---
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href={routeFor('home', locale)} aria-label="Mata Ara — {locale === 'fr' ? 'accueil' : 'home'}"><span class="brand-mark" aria-hidden="true">M</span><span>Mata Ara</span></a>
+    <a class="brand" href={routeFor('home', locale)} aria-label={`Mata Ara — ${locale === 'fr' ? 'accueil' : 'home'}`}><span class="brand-mark" aria-hidden="true">M</span><span>Mata Ara</span></a>
     <nav aria-label={menuLabel}>
       <ul class="header-nav">
         {navIds.map((id) => <li><a href={routeFor(id, locale)} aria-current={pageId === id ? 'page' : undefined}>{pages[id].localized[locale].nav}</a></li>)}
