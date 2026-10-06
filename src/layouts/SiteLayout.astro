@@ -9,9 +9,8 @@ const { locale, pageId, title, description } = Astro.props as {
 const page = pages[pageId];
 const pageTitle = title ?? page.localized[locale].title;
 const pageDescription = description ?? page.localized[locale].description;
-const configuredSiteUrl = import.meta.env.SITE_URL?.replace(/\/$/, '');
+const configuredSiteUrl = import.meta.env.SITE?.replace(/\/$/, '');
 const canonical = configuredSiteUrl ? new URL(routeFor(pageId, locale), `${configuredSiteUrl}/`).href : undefined;
-const socialImage = configuredSiteUrl ? new URL('/assets/mata-ara-app-icon.png', `${configuredSiteUrl}/`).href : undefined;
 ---
 <!doctype html>
 <html lang={locale}>
@@ -31,8 +30,7 @@ const socialImage = configuredSiteUrl ? new URL('/assets/mata-ara-app-icon.png',
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
     {canonical && <meta property="og:url" content={canonical} />}
-    {socialImage && <meta property="og:image" content={socialImage} />}
-    <meta name="twitter:card" content={socialImage ? 'summary' : 'summary'} />
+    <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={pageDescription} />
   </head>

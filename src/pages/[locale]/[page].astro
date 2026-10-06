@@ -11,7 +11,7 @@ const page = pages[id].localized[locale];
 <SiteLayout locale={locale} pageId={id}>
   <section class="container page-intro">
     <p class="eyebrow">Mata Ara</p>
-    <h1>{page.title.replace(/ — Mata Ara$/, '').replace(/ — Mata Ara$/, '')}</h1>
+    <h1>{page.title.replace(/ — Mata Ara$/, '')}</h1>
     <p class="lead">{page.description}</p>
   </section>
   <slot />
