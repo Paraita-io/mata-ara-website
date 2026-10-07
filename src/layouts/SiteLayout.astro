@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-import { pages, routeFor, type Locale, type PageId } from '../content/pages';
+import { pages, publicPath, routeFor, type Locale, type PageId } from '../content/pages';
 const { locale, pageId, title, description } = Astro.props as {
   locale: Locale; pageId: PageId; title?: string; description?: string;
 };
@@ -11,7 +11,7 @@ const pageTitle = title ?? page.localized[locale].title;
 const pageDescription = description ?? page.localized[locale].description;
 const configuredSiteUrl = import.meta.env.SITE?.replace(/\/$/, '');
 const canonical = configuredSiteUrl ? new URL(routeFor(pageId, locale), `${configuredSiteUrl}/`).href : undefined;
-const socialImage = configuredSiteUrl ? new URL(`${import.meta.env.BASE_URL}assets/mata-ara-mark.png`, `${configuredSiteUrl}/`).href : undefined;
+const socialImage = configuredSiteUrl ? new URL(publicPath('assets/mata-ara-mark.png'), `${configuredSiteUrl}/`).href : undefined;
 ---
 <!doctype html>
 <html lang={locale}>

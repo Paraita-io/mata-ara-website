@@ -3,6 +3,10 @@ import { resolve } from 'node:path';
 
 const outputDir = resolve('dist');
 const configured = process.env.SITE_URL?.trim();
+const requestedBase = process.env.BASE_PATH?.trim() ?? '';
+const basePath = requestedBase
+  ? `/${requestedBase.split('/').filter(Boolean).join('/')}`
+  : '';
 const robotsPath = resolve(outputDir, 'robots.txt');
 const sitemapPath = resolve(outputDir, 'sitemap.xml');
 
@@ -41,7 +45,8 @@ for (const file of htmlFiles) {
 }
 const escapeXml = (value) => value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&apos;');
 const urls = [...canonicalUrls].sort().map((url) => `  <url><loc>${escapeXml(url)}</loc></url>`).join('\n');
+const sitemapUrl = new URL(`${basePath}/sitemap.xml`, `${origin}/`).href;
 
 await mkdir(outputDir, { recursive: true });
 await writeFile(sitemapPath, `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`, 'utf8');
-await writeFile(robotsPath, `User-agent: *\nAllow: /\nSitemap: ${origin}/sitemap.xml\n`, 'utf8');
+await writeFile(robotsPath, `User-agent: *\nAllow: /\nSitemap: ${sitemapUrl}\n`, 'utf8');
