@@ -59,6 +59,7 @@
 - Modify: `src/content/pages.ts`
 - Modify: `src/layouts/SiteLayout.astro`
 - Modify: `src/components/PressKit.astro`
+- Modify: `scripts/generate-release-metadata.mjs`
 - Inspect: `src/components/`, `src/pages/`, and `public/` for root-absolute internal paths.
 
 - [ ] Read `BASE_PATH` as an environment variable, normalize a leading slash/no trailing slash, and omit Astro's `base` for an empty/root value.
@@ -84,6 +85,7 @@
 - [ ] Separate build and deploy jobs, require deploy to wait for build, and bind deploy to environment `github-pages`.
 - [ ] Document that the repository Pages source must be set to GitHub Actions and provide the expected project URL.
 - [ ] Document custom-domain prerequisites: GitHub Pages domain + DNS/CNAME setup, `SITE_URL` update, and empty `BASE_PATH`.
+- [ ] Note that a project site's `robots.txt` is served under the repository prefix, while standard robots discovery is at the host root; do not claim GitHub Pages project output alone publishes a host-root robots file.
 - [ ] Document that the existing app privacy URL (`https://paraita.io/privacy`) must be updated in the app/App Store metadata or served by the chosen custom domain before release.
 - [ ] Parse/inspect the YAML, build both root and Pages-base variants, and inspect generated routes, assets, sitemap and robots files. Do not push or trigger the workflow.
 - [ ] Commit with a focused message.
