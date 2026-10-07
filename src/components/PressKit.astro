@@ -46,14 +46,14 @@ const fr = locale === 'fr';
       : 'These Mata Ara files come from the app project: the mark from its v2 artwork and the marketing icon from its iOS icon catalog.'}</p>
     <div class="press-asset-grid">
       <article class="press-asset-card">
-        <img src="/assets/mata-ara-mark.png" width="1024" height="1024" alt={fr ? 'Symbole Mata Ara sur fond transparent' : 'Mata Ara mark on a transparent background'} loading="lazy" />
+        <img src={`${import.meta.env.BASE_URL}assets/mata-ara-mark.png`} width="1024" height="1024" alt={fr ? 'Symbole Mata Ara sur fond transparent' : 'Mata Ara mark on a transparent background'} loading="lazy" />
         <h3>{fr ? 'Symbole de marque · PNG · 1024 × 1024' : 'Brand mark · PNG · 1024 × 1024'}</h3>
-        <a class="button-link" href="/press-kit/mata-ara-mark-1024.png" download>{fr ? 'Télécharger le symbole' : 'Download the mark'} <span aria-hidden="true">↓</span></a>
+        <a class="button-link" href={`${import.meta.env.BASE_URL}press-kit/mata-ara-mark-1024.png`} download>{fr ? 'Télécharger le symbole' : 'Download the mark'} <span aria-hidden="true">↓</span></a>
       </article>
       <article class="press-asset-card">
-        <img src="/assets/mata-ara-app-icon.png" width="1024" height="1024" alt={fr ? 'Icône de l’application Mata Ara' : 'Mata Ara app icon'} loading="lazy" />
+        <img src={`${import.meta.env.BASE_URL}assets/mata-ara-app-icon.png`} width="1024" height="1024" alt={fr ? 'Icône de l’application Mata Ara' : 'Mata Ara app icon'} loading="lazy" />
         <h3>{fr ? 'Icône de l’application · PNG · 1024 × 1024' : 'App icon · PNG · 1024 × 1024'}</h3>
-        <a class="button-link" href="/press-kit/mata-ara-app-icon-1024.png" download>{fr ? 'Télécharger l’icône' : 'Download the app icon'} <span aria-hidden="true">↓</span></a>
+        <a class="button-link" href={`${import.meta.env.BASE_URL}press-kit/mata-ara-app-icon-1024.png`} download>{fr ? 'Télécharger l’icône' : 'Download the app icon'} <span aria-hidden="true">↓</span></a>
       </article>
     </div>
     <p class="press-terms">{fr

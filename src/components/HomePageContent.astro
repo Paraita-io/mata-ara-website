@@ -1,0 +1,31 @@
+---
+import type { Locale } from '../content/pages';
+import { routeFor } from '../content/pages';
+import PersonaPaths from './PersonaPaths.astro';
+import AppStoreLink from './AppStoreLink.astro';
+
+const { locale } = Astro.props as { locale: Locale };
+const fr = locale === 'fr';
+---
+
+<section class="container home-hero">
+  <div class="hero-copy">
+    <p class="eyebrow">Mata Ara <span aria-hidden="true">/</span> {fr ? 'Suivi réseau' : 'Network insights'}</p>
+    <h1>{fr ? 'Votre réseau, en clair.' : 'Your network, made clear.'}</h1>
+    <p class="lead">{fr ? 'Suivez votre enveloppe mobile, observez les compteurs réseau de votre appareil et gardez le cap sur un forfait de voyage.' : 'Track your mobile allowance, explore your device’s network counters, and stay on top of a travel plan.'}</p>
+    <p class="hero-meta">{fr ? 'Pour un coup d’œil rapide, une observation détaillée ou une escapade connectée.' : 'For a quick check, a closer look, or a connected trip.'}</p>
+    <AppStoreLink locale={locale} />
+  </div>
+  <div class="hero-art" aria-hidden="true">
+    <div class="network-orbit orbit-one"></div>
+    <div class="network-orbit orbit-two"></div>
+    <div class="network-core"><span class="brand-mark">M</span><span>{fr ? 'Activité réseau' : 'Network activity'}</span><b>{fr ? 'à votre rythme' : 'at your pace'}</b></div>
+    <span class="orbit-dot dot-one"></span><span class="orbit-dot dot-two"></span>
+  </div>
+</section>
+<PersonaPaths locale={locale} />
+<section class="container home-detail">
+  <div><p class="eyebrow">{fr ? 'Les essentiels' : 'The essentials'}</p><h2>{fr ? 'Des compteurs clairs, des choix qui restent les vôtres.' : 'Clear counters, with settings that stay yours.'}</h2></div>
+  <p>{fr ? 'Configurez votre quota et votre cycle, choisissez vos alertes, puis consultez l’historique quand vous en avez besoin. Un achat unique permet de déverrouiller la version complète.' : 'Set your quota and cycle, choose your alerts, then check history when you need it. A one-time purchase unlocks the full version.'}<br/><a href={routeFor('features', locale)}>{fr ? 'Explorer toutes les fonctionnalités' : 'Explore all features'} <span aria-hidden="true">→</span></a></p>
+</section>
+<p class="container home-language"><a href={routeFor('home', locale === 'fr' ? 'en' : 'fr')} lang={locale === 'fr' ? 'en' : 'fr'}>{locale === 'fr' ? 'English version' : 'Version française'}</a></p>

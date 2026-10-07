@@ -60,7 +60,9 @@ export const pages = {
 
 export function routeFor(id: PageId, locale: Locale): string {
   const slug = pages[id].localized[locale].slug;
-  return slug ? `/${locale}/${slug}` : `/${locale}`;
+  const route = slug ? `/${locale}/${slug}` : `/${locale}`;
+  const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+  return `${base}${route}`;
 }
 
 export function localizedPage(id: PageId, locale: Locale): LocalizedPage {
