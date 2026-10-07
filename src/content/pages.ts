@@ -5,7 +5,7 @@ export type PageId = 'home' | 'features' | 'privacy' | 'support' | 'contact' | '
 type LocalizedPage = { slug: string; nav: string; title: string; description: string };
 export type PageDefinition = { id: PageId; localized: Record<Locale, LocalizedPage> };
 
-/** Explicit route and metadata source for every public page. Routes follow Astro's no-trailing-slash output. */
+/** Explicit route and metadata source for every public page. Routes match static directory index output. */
 export const pages = {
   home: {
     id: 'home',
@@ -60,7 +60,7 @@ export const pages = {
 
 export function routeFor(id: PageId, locale: Locale): string {
   const slug = pages[id].localized[locale].slug;
-  const route = slug ? `/${locale}/${slug}` : `/${locale}`;
+  const route = slug ? `/${locale}/${slug}/` : `/${locale}/`;
   return publicPath(route);
 }
 

@@ -6,9 +6,10 @@ Make English the default language and prepare this static Astro site for automat
 
 ## Approved behavior
 
-- `/` presents the English home page without JavaScript. `/en` remains the canonical English home route and `/fr` remains the French home route.
+- `/` presents the English home page without JavaScript. `/en/` remains the canonical English home route and `/fr/` remains the French home route.
 - English is Astro's default locale and the root page's metadata/canonical language is English. Language switching continues to map to the corresponding page.
-- The root English alias and `/en` both canonicalize to the same prefixed English route; `x-default` points to that English canonical. The `/privacy` compatibility path canonicalizes to the French localized privacy page.
+- The root English alias and `/en/` both canonicalize to the same prefixed English route; `x-default` points to that English canonical. The `/privacy/` compatibility path canonicalizes to the French localized privacy page.
+- Localized routes use a trailing slash to match their generated `index.html` directory structure and avoid relying on extensionless URL rewrites from static hosting.
 - Local development uses the site root by default. Builds accept a configurable `BASE_PATH` so Astro routes, navigation, canonical/hreflang links, social images, press assets and the legacy `/privacy` compatibility page work when hosted below a repository path.
 - The GitHub Pages workflow builds with `BASE_PATH=/mata-ara-website` and `SITE_URL=https://paraita-io.github.io`, and deploys on pushes to `main` or a manual workflow dispatch. It does not run until changes are pushed; no push or deployment is part of this task.
 - A future custom-domain deployment can set `SITE_URL` to the domain origin and `BASE_PATH` to an empty value, and must also configure DNS and the custom domain/CNAME in GitHub Pages. The README will explain these steps and build inputs.

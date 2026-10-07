@@ -1,6 +1,6 @@
 # Mata Ara website
 
-Static French and English product, support, privacy, contact, legal, and press-kit pages for Mata Ara. Astro generates the site at build time; no server adapter, analytics, or cookie tracking is configured.
+Static French and English product, support, privacy, contact, legal, and press-kit pages for Mata Ara. English is the default at `/`; `/en` remains available and `/fr` serves French. Astro generates the site at build time; no server adapter, analytics, or cookie tracking is configured.
 
 ## Requirements
 
@@ -30,6 +30,7 @@ Set these environment variables in the deployment environment before running `np
 | Variable | Default | Purpose |
 | --- | --- | --- |
 | `SITE_URL` | unset | Public origin used for absolute canonical and sitemap URLs. Supply the final HTTPS origin, without a path. Without it, builds do not assume a production domain. |
+| `BASE_PATH` | unset | Optional path prefix for project-site hosting, such as `/mata-ara-website`. Leave unset for a root deployment or custom domain. |
 | `APP_STORE_URL` | `https://apps.apple.com/app/mata-ara/id1527207105` | App Store product destination. Confirm the product record for the major release before launch. |
 | `RELEASE_CTA_ENABLED` | `false` | Set to `true` to enable the release/download call to action after the listing is ready. Accepted true values are `true`, `1`, `yes`, and `on`. |
 
@@ -37,11 +38,22 @@ Example:
 
 ```sh
 SITE_URL=https://example.com \
+BASE_PATH= \
 APP_STORE_URL=https://apps.apple.com/app/mata-ara/id1527207105 \
 RELEASE_CTA_ENABLED=true npm run build
 ```
 
-Routes use explicit `/fr/` and `/en/` locale prefixes, including the default French locale. Astro emits static extensionless routes.
+Routes use explicit `/fr/` and `/en/` locale prefixes. Astro emits static directory `index.html` files and serves slash-terminated page URLs. The root home page is English and canonicalizes to `/en/`.
+
+## GitHub Pages
+
+The repository includes a GitHub Actions workflow that builds and publishes the site on each push to `main`, or when run manually from the Actions tab. The expected project-site URL is `https://paraita-io.github.io/mata-ara-website/`. In the repository, open **Settings → Pages** and choose **GitHub Actions** as the publishing source. The workflow sets `SITE_URL=https://paraita-io.github.io` and `BASE_PATH=/mata-ara-website` so pages, internal links, and assets work below the repository path.
+
+For local development, `npm run dev` uses the root path by default. To preview the project-site path locally, build with the same `SITE_URL` and `BASE_PATH` values and run `npm run preview`.
+
+For a custom domain, configure its DNS records and GitHub Pages custom-domain setting, add a `public/CNAME` file containing that domain, set `SITE_URL` to its HTTPS origin, and use an empty `BASE_PATH`. Update the Pages workflow values too. A project site's `robots.txt` is emitted under its repository prefix; standard robots discovery is at the host root, which this project-site artifact cannot control.
+
+The app currently links to `https://paraita.io/privacy`. Before release, either serve this site at that custom domain or update the app's in-app privacy URL and the corresponding App Store Connect privacy URL to the final public `/privacy` route.
 
 ## Release checks
 
@@ -53,9 +65,9 @@ Use the final public HTTPS origin after hosting is configured:
 
 | App Store Connect field | URL |
 | --- | --- |
-| Marketing URL | `https://<production-domain>/en` (or `/fr`) |
-| Support URL | `https://<production-domain>/en/support` (or `/fr/assistance`) |
-| Privacy Policy URL | `https://<production-domain>/privacy` (compatibility route used by the current app), or the localized `/fr/confidentialite` / `/en/privacy` page |
+| Marketing URL | `https://<production-domain>/en/` (or `/fr/`) |
+| Support URL | `https://<production-domain>/en/support/` (or `/fr/assistance/`) |
+| Privacy Policy URL | `https://<production-domain>/privacy/` (compatibility route used by the current app), or the localized `/fr/confidentialite/` / `/en/privacy/` page |
 
 The bracketed production domain is a release input, not a literal URL. Set `SITE_URL` to that HTTPS origin when building for production. The build then emits `sitemap.xml` with only the 14 canonical localized pages and adds its absolute URL to `robots.txt`. Without `SITE_URL`, the build omits the sitemap and uses a host-independent `robots.txt`; it does not guess a production domain. Canonical, social-preview and `hreflang` absolute URLs are likewise omitted until the origin is configured.
 

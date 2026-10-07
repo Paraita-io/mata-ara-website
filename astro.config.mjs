@@ -10,7 +10,7 @@ export default defineConfig({
   ...(siteUrl ? { site: siteUrl } : {}),
   ...(normalizedBase ? { base: normalizedBase } : {}),
   output: 'static',
-  trailingSlash: 'never',
+  trailingSlash: 'always',
   i18n: {
     defaultLocale: 'en',
     locales: ['fr', 'en'],
