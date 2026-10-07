@@ -27,7 +27,7 @@
 - `src/components/HomePageContent.astro`: shared localized home content to avoid drift between `/` and `/en`.
 - `src/components/PressKit.astro`: prefix public previews and download links with the configured base.
 - `src/layouts/SiteLayout.astro`: base-aware canonical, hreflang, social image and locale metadata; x-default points to English.
-- `scripts/generate-release-metadata.mjs`: keep sitemap and robots output consistent with base-aware canonical URLs.
+- `scripts/generate-release-metadata.mjs`: keep sitemap locations and the robots sitemap directive consistent with base-aware canonical URLs.
 - `.github/workflows/deploy.yml`: build and deploy on `main` pushes and manual workflow dispatch, with least-privilege Pages permissions.
 - `README.md`: explain default language, Pages URL, one-time Pages setting, custom-domain setup, and app privacy URL follow-up.
 
@@ -65,7 +65,9 @@
 - [ ] Make `routeFor()` prefix the configured Astro `BASE_URL` exactly once, without affecting static route parameters.
 - [ ] Prefix press preview/download URLs and social image URLs with the configured base. Inspect all source absolute paths and fix internal paths; leave external links unchanged.
 - [ ] Verify canonical, hreflang, x-default, OG/Twitter and sitemap URLs include the configured base exactly once.
+- [ ] Update `scripts/generate-release-metadata.mjs` so both sitemap `<loc>` values and the absolute robots `Sitemap:` directive include `/mata-ara-website` for the Pages build, but no extra path for root builds.
 - [ ] Build with no `BASE_PATH` and with `BASE_PATH=/mata-ara-website`; inspect HTML and asset references in both `dist` outputs.
+- [ ] Confirm the repository-path sitemap is at `/mata-ara-website/sitemap.xml`, the robots directive names that URL, and the root build retains `/sitemap.xml`.
 - [ ] Commit with a focused message.
 
 ## Chunk 3: GitHub Pages automation and handoff docs
@@ -77,7 +79,7 @@
 - Modify: `README.md`
 
 - [ ] Add a workflow triggered by pushes to `main` and `workflow_dispatch`.
-- [ ] Use Astro's official Pages build action and GitHub's deploy-pages action; grant only `contents: read`, `pages: write`, and `id-token: write`.
+- [ ] Use `actions/checkout@v7`, Astro's official `withastro/action@v6`, and `actions/deploy-pages@v5`; grant only `contents: read`, `pages: write`, and `id-token: write`.
 - [ ] Set the Pages build environment to `SITE_URL=https://paraita-io.github.io` and `BASE_PATH=/mata-ara-website`.
 - [ ] Separate build and deploy jobs, require deploy to wait for build, and bind deploy to environment `github-pages`.
 - [ ] Document that the repository Pages source must be set to GitHub Actions and provide the expected project URL.
