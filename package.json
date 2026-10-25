@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build && node scripts/generate-release-metadata.mjs",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "test": "node --test"
   },
   "dependencies": {
     "astro": "^7.3.6"
