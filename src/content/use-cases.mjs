@@ -17,7 +17,7 @@ export const useCases = {
       title: 'Suivi du forfait mobile — Mata Ara',
       description: 'Configurez votre quota et votre cycle mensuel, puis suivez l’usage cellulaire avec les compteurs de l’appareil.',
       paragraphs: [
-        'Saisissez le volume de données de votre forfait et choisissez le jour de début de votre cycle mensuel, entre le 1 et le 28. Mata Ara compare l’usage cellulaire mesuré sur votre appareil au quota configuré pour vous indiquer ce qu’il vous reste pendant le cycle.',
+        'Saisissez le volume de données de votre forfait et choisissez le jour de début de votre cycle mensuel, entre le 1er et le 28. Mata Ara compare l’usage cellulaire mesuré sur votre appareil au quota configuré pour vous indiquer ce qu’il vous reste pendant le cycle.',
         'Consultez l’activité en envoi et en réception, puis l’historique horaire et journalier pour comprendre son évolution. Les graphiques peuvent couvrir 24 heures, 7 jours, 1 mois ou 3 mois de relevés.',
         'Si le total affiché doit être ajusté, vous pouvez recalibrer le suivi dans l’app. Les compteurs viennent de l’appareil et peuvent différer du total de facturation de votre opérateur ; consultez celui-ci comme référence de facturation.',
       ],

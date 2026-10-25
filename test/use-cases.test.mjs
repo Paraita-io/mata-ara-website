@@ -56,7 +56,7 @@ test('each use case has distinct localized metadata and substantive copy', () =>
 
 test('mobile allowance copy states the supported monthly cycle start days', () => {
   assert.match(useCases.mobileData.en.paragraphs.join(' '), /monthly cycle start day from 1 to 28|day.{0,20}1 to 28/i);
-  assert.match(useCases.mobileData.fr.paragraphs.join(' '), /jour.{0,45}1 et le 28|jour.{0,45}1 à 28/i);
+  assert.match(useCases.mobileData.fr.paragraphs.join(' '), /jour.{0,45}1er et le 28|jour.{0,45}1er à 28/i);
 });
 
 test('interface counters explain they are not per-app traffic in both languages', () => {
