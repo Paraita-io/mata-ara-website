@@ -36,8 +36,16 @@ test('all three use cases have the approved paired localized routes', () => {
 });
 
 test('homepage use-case cards link directly to their matching localized pages', () => {
-  for (const [id, locales] of Object.entries(expected)) {
-    assert.equal(personaPaths.split(`id: '${id}'`).length - 1, 2, `both localized cards must map to the '${id}' page`);
+  const localizedPaths = personaPaths.match(/const paths = fr \? \[([\s\S]*?)\] : \[([\s\S]*?)\];/);
+  assert.ok(localizedPaths, 'homepage cards must define French and English path lists');
+  const frenchIds = [...localizedPaths[1].matchAll(/id: '([^']+)'/g)].map((match) => match[1]);
+  const englishIds = [...localizedPaths[2].matchAll(/id: '([^']+)'/g)].map((match) => match[1]);
+  const expectedCardOrder = ['mobileData', 'networkCounters', 'travelEsim'];
+  assert.deepEqual(frenchIds, expectedCardOrder, 'French cards must map data, interface counters, and travel eSIM in display order');
+  assert.deepEqual(englishIds, expectedCardOrder, 'English cards must map data, interface counters, and travel eSIM in display order');
+
+  for (const id of expectedCardOrder) {
+    const locales = expected[id];
     for (const [locale, route] of Object.entries(locales)) {
       const { route: registeredRoute } = localizedMetadata(id, locale);
       assert.equal(registeredRoute, route, `${id}/${locale} target must be its dedicated use-case route`);
