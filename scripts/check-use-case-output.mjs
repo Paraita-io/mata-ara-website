@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { useCases } from '../src/content/use-cases.mjs';
+import { findUnprefixedLocaleRootLinks } from './use-case-output-utils.mjs';
 
 const siteUrl = process.env.SITE_URL?.trim();
 if (!siteUrl) {
@@ -105,7 +106,7 @@ for (const slug of Object.keys(expected)) {
   const { locale } = expected[slug];
   const html = await readFile(resolve('dist', locale, slug, 'index.html'), 'utf8');
   assert.doesNotMatch(html, /(?:href|src)="[^"]*\/dist\//, `${locale}/${slug} does not expose dist paths`);
-  assert.doesNotMatch(html, new RegExp(`(?:href|src)="${locale === 'en' ? 'en' : 'fr'}/`), `${locale}/${slug} does not expose unprefixed route URLs`);
+  assert.deepEqual(findUnprefixedLocaleRootLinks(html, basePath), [], `${locale}/${slug} does not expose unprefixed locale-root links`);
 }
 
 console.log(`Verified six use-case routes, home and feature discovery, icons, metadata, sitemap and robots under ${basePath || '/'}.`);
