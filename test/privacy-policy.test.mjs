@@ -34,7 +34,14 @@ function hasParagraph(entries, predicate) {
 const policyRequirements = {
   en: [
     ['Google Mobile Ads is identified', ({ text }) => /Google Mobile Ads/.test(text)],
-    ['UMP and consent are explained together', ({ text }) => /UMP/i.test(text) && /consent/i.test(text)],
+    [
+      'UMP consent is described as region-dependent',
+      ({ text }) => /UMP/i.test(text) && /consent/i.test(text) && /region(?:-dependent|al|s)?/i.test(text),
+    ],
+    [
+      'UMP canRequestAds gates ad requests',
+      ({ text }) => /UMP/i.test(text) && /canRequestAds/.test(text) && /ad requests?/i.test(text),
+    ],
     [
       'ATT denial and non-personalized ads are explained together',
       ({ text }) => /ATT/i.test(text) && /(?:decline|deny)/i.test(text) && /non-personalized ads/i.test(text),
@@ -44,8 +51,8 @@ const policyRequirements = {
       ({ text }) => /ATT/i.test(text) && /IDFA/i.test(text) && /(?:does not send|not send|not transmitted)/i.test(text),
     ],
     [
-      'privacy choices and Settings directions are together',
-      ({ text }) => /Privacy choices/i.test(text) && /Settings/i.test(text),
+      'Settings exposes Privacy choices when UMP requires it',
+      ({ text }) => /Settings/i.test(text) && /Privacy choices/i.test(text) && /UMP/i.test(text) && /required/i.test(text),
     ],
     [
       'GitHub Pages IP logging and its security purpose are together',
@@ -67,7 +74,14 @@ const policyRequirements = {
   ],
   fr: [
     ['Google Mobile Ads est identifié', ({ text }) => /Google Mobile Ads/.test(text)],
-    ['UMP et le consentement sont expliqués ensemble', ({ text }) => /UMP/i.test(text) && /consentement/i.test(text)],
+    [
+      'le consentement UMP est décrit comme dépendant de la région',
+      ({ text }) => /UMP/i.test(text) && /consentement/i.test(text) && /région/i.test(text),
+    ],
+    [
+      'canRequestAds d’UMP conditionne les demandes publicitaires',
+      ({ text }) => /UMP/i.test(text) && /canRequestAds/.test(text) && /(?:demandes? publicitaires|demandes? de publicités|requêtes? publicitaires|solliciter des annonces)/i.test(text),
+    ],
     [
       'le refus ATT et les annonces non personnalisées sont expliqués ensemble',
       ({ text }) => /ATT/i.test(text) && /refus|refuser/i.test(text) && /annonces non personnalisées/i.test(text),
@@ -77,8 +91,8 @@ const policyRequirements = {
       ({ text }) => /ATT/i.test(text) && /IDFA/i.test(text) && /(?:ne transmet|n’envoie|ne communique)/i.test(text),
     ],
     [
-      'les choix de confidentialité et les réglages iOS sont expliqués ensemble',
-      ({ text }) => /choix de confidentialité/i.test(text) && /Réglages/i.test(text),
+      'les Réglages affichent les choix de confidentialité lorsque UMP les exige',
+      ({ text }) => /Réglages/i.test(text) && /Privacy choices/i.test(text) && /UMP/i.test(text) && /requis/i.test(text),
     ],
     [
       'la journalisation IP de GitHub Pages et son but de sécurité sont expliqués ensemble',
