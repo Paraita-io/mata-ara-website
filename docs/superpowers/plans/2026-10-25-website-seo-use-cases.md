@@ -18,7 +18,7 @@
 - `src/pages/[locale]/[page].astro`: dispatch use-case IDs to the dedicated component while retaining existing page rendering.
 - `src/components/PersonaPaths.astro`: link homepage cards directly to corresponding use-case routes.
 - `src/components/FeatureCards.astro`: add directly related links from the matching feature sections to their dedicated use-case routes.
-- `src/components/SiteHeader.astro`, `src/layouts/SiteLayout.astro`: use the existing mark in the header and expose favicon/touch-icon metadata.
+- `src/components/SiteHeader.astro`, `src/layouts/SiteLayout.astro`: use the existing mark in the header and expose favicon/touch-icon metadata; `public/assets/mata-ara-favicon-32.png` and `public/assets/mata-ara-apple-touch-icon-180.png` are sized variants derived from the existing app artwork.
 - `src/styles/global.css`: animate existing hero orbits/network points and keep the existing reduced-motion rules effective.
 - `test/use-cases.test.mjs`: verify all localized copy, route pairing, breadcrumb/related route references, and accurate scope claims.
 - `test/branding.test.mjs`: verify the header mark, favicon declarations, and reduced-motion-aware animation contract.
@@ -76,8 +76,9 @@
 - Modify: `src/layouts/SiteLayout.astro`
 - Modify: `src/styles/global.css`
 - Create: `test/branding.test.mjs`
+- Create: `public/assets/mata-ara-favicon-32.png` and `public/assets/mata-ara-apple-touch-icon-180.png` as resized variants of the existing app icon.
 
-- [x] Add failing source/render checks requiring the header to use the existing `public/assets/mata-ara-mark.png`, and the layout to declare the existing `mata-ara-app-icon.png` for browser and Apple touch icons.
+- [x] Add failing source/render checks requiring the header to use the existing `public/assets/mata-ara-mark.png`, and the layout to declare the derived 32×32 browser favicon and 180×180 Apple touch icon.
 - [x] Add failing CSS checks for a restrained orbit/dot animation and ensure the existing `prefers-reduced-motion: reduce` media query disables animation.
 - [x] Replace the header's CSS `M` tile with a sized image using empty alt text and accessible existing brand link text. Add favicon and Apple touch icon URLs through Astro's `BASE_URL`-aware public path helper.
 - [x] Animate the existing orbits and orbit dots slowly, using transforms/opacity only; leave the decorative hero `aria-hidden`. Retain the current reduced-motion override.
