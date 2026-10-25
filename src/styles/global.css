@@ -188,6 +188,10 @@ select {
 .home-detail .eyebrow { color: var(--color-accent); }
 .home-detail p { margin: 0; color: #e0eae6; }
 .home-detail a { display: inline-block; margin-top: var(--space-4); color: var(--color-accent); font-weight: 700; }
+.premium-callout { display: flex; align-items: center; justify-content: space-between; gap: var(--space-8); margin-top: var(--space-8); padding: clamp(1.25rem, 3vw, 2rem); border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface-muted); }
+.premium-callout h2 { margin: 0 0 var(--space-2); font-size: var(--font-size-xl); line-height: 1.15; }
+.premium-callout p:not(.eyebrow) { max-width: 48rem; margin: 0; color: var(--color-ink-soft); }
+.premium-callout a { flex: 0 0 auto; color: var(--color-brand-strong); font-weight: 700; }
 .feature-groups { display: grid; gap: var(--space-6); }
 .feature-story { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: var(--space-8); align-items: center; padding: clamp(1.5rem, 4vw, 3rem); border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); }
 .feature-story:nth-child(2) { background: #eef3ef; }
@@ -202,6 +206,16 @@ select {
 .tool-card h3 { margin-top: 0; }
 .measurement-note { padding: var(--space-6); border-left: 4px solid var(--color-brand); background: var(--color-surface-muted); color: var(--color-ink-soft); }
 .measurement-note p { margin: 0; }
+.premium-section { padding-block: var(--space-12); scroll-margin-top: var(--space-8); }
+.comparison-scroll { overflow-x: auto; border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: var(--color-surface); }
+.comparison-scroll:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+.comparison-table { width: 100%; min-width: 42rem; border-collapse: collapse; text-align: left; }
+.comparison-table caption { padding: var(--space-4); color: var(--color-ink-soft); font-weight: 600; text-align: left; }
+.comparison-table th, .comparison-table td { padding: var(--space-4); border-top: 1px solid var(--color-border); vertical-align: top; }
+.comparison-table thead th { background: var(--color-ink); color: var(--color-white); }
+.comparison-table tbody th { width: 56%; color: var(--color-ink); font-weight: 650; }
+.comparison-table td { color: var(--color-ink-soft); }
+.premium-purchase-note { margin: var(--space-4) 0 0; color: var(--color-ink-soft); }
 
 .visually-hidden {
   position: absolute;
@@ -230,6 +244,7 @@ select {
   .persona-card { min-height: 14rem; }
   .home-detail, .feature-story { grid-template-columns: 1fr; }
   .feature-story { gap: var(--space-6); }
+  .premium-callout { align-items: flex-start; flex-direction: column; gap: var(--space-4); }
   .footer-inner { align-items: flex-start; flex-direction: column; gap: var(--space-3); }
 }
 

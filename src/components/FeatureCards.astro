@@ -20,6 +20,36 @@ const tools = fr ? [
   { title: 'A glance from your wrist or Home Screen', text: 'An Apple Watch companion and a configurable Home Screen widget extend your tracking.' },
   { title: 'One-time full-version unlock', text: 'The app offers a one-time purchase to unlock the full version. See the App Store for availability details.' },
 ];
+
+const comparison = fr ? {
+  title: 'Comparez les versions gratuite et complète', intro: 'La version complète reprend les fonctionnalités gratuites et ajoute quelques options.',
+  region: 'Comparaison des versions gratuite et complète', caption: 'La version complète comprend toutes les fonctionnalités de la version gratuite.',
+  headers: ['Fonctionnalité', 'Gratuite', 'Complète'],
+  rows: [
+    ['Quota configuré et compteurs réseau actualisés en direct', 'Inclus', 'Inclus'],
+    ['Onglet Historique et graphiques d’usage', 'Inclus', 'Inclus'],
+    ['Notifications de quota à 100 %', 'Inclus', 'Inclus'],
+    ['Alerte de débit, rappel d’expiration et alerte de consommation inhabituelle', 'Inclus', 'Inclus'],
+    ['Compagnon Apple Watch et widget d’écran d’accueil', 'Inclus', 'Inclus'],
+    ['Notifications facultatives aux seuils de 50 %, 75 % et 90 %', '—', 'Inclus'],
+    ['Historique détaillé des vitesses en envoi et réception par interface, depuis une fiche de suivi', '—', 'Inclus'],
+    ['Bannière publicitaire sur l’écran principal', 'Affichée', 'Supprimée'],
+  ], purchase: 'La version complète est proposée comme achat intégré unique. Le prix actuel est affiché par l’App Store.',
+} : {
+  title: 'Compare Free and Premium', intro: 'Premium includes the Free features and adds a few options.',
+  region: 'Free and Premium comparison', caption: 'Premium includes every feature in the Free version.',
+  headers: ['Feature', 'Free', 'Premium'],
+  rows: [
+    ['Configured quota and live network-interface counters', 'Included', 'Included'],
+    ['History tab and usage charts', 'Included', 'Included'],
+    ['100% quota notification', 'Included', 'Included'],
+    ['Rate warning, expiry reminder, and unusual-usage alert', 'Included', 'Included'],
+    ['Apple Watch companion and Home Screen widget', 'Included', 'Included'],
+    ['Optional notifications at 50%, 75%, and 90% thresholds', '—', 'Included'],
+    ['Detailed per-interface upload and download speed history, opened from a monitoring card', '—', 'Included'],
+    ['Banner ad on the main screen', 'Shown', 'Removed'],
+  ], purchase: 'Premium is a one-time in-app purchase. The current price is shown by the App Store.',
+};
 ---
 <div class="feature-page">
   <div class="container feature-groups">
@@ -30,5 +60,15 @@ const tools = fr ? [
     </section>)}
   </div>
   <section class="container tool-section" aria-labelledby="tool-title"><div class="section-heading"><p class="eyebrow">{fr ? 'Au quotidien' : 'Everyday tools'}</p><h2 id="tool-title">{fr ? 'Les détails qui font la différence.' : 'The details that make a difference.'}</h2></div><div class="tool-grid">{tools.map((tool) => <article class="tool-card"><h3>{tool.title}</h3><p>{tool.text}</p></article>)}</div></section>
+  <section class="container premium-section" id="premium" aria-labelledby="premium-title">
+    <div class="section-heading"><p class="eyebrow">{fr ? 'Choisissez votre version' : 'Choose your version'}</p><h2 id="premium-title">{comparison.title}</h2><p>{comparison.intro}</p></div>
+    <div class="comparison-scroll" role="region" aria-label={comparison.region} tabindex="0">
+      <table class="comparison-table"><caption>{comparison.caption}</caption>
+        <thead><tr>{comparison.headers.map((header) => <th scope="col">{header}</th>)}</tr></thead>
+        <tbody>{comparison.rows.map((row) => <tr><th scope="row">{row[0]}</th><td>{row[1]}</td><td>{row[2]}</td></tr>)}</tbody>
+      </table>
+    </div>
+    <p class="premium-purchase-note">{comparison.purchase}</p>
+  </section>
   <aside class="container measurement-note"><p><strong>{fr ? 'À garder en tête' : 'A note on measurements'}</strong> — {fr ? 'Mata Ara présente les compteurs fournis par l’appareil. Le classement des interfaces et les totaux peuvent varier selon le matériel, iOS et la configuration réseau; ils peuvent différer de la mesure de votre opérateur.' : 'Mata Ara presents counters supplied by the device. Interface classification and totals can vary with hardware, iOS, and network setup, and may differ from your carrier’s measurement.'}</p></aside>
 </div>

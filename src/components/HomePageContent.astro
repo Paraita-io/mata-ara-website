@@ -25,6 +25,11 @@ const fr = locale === 'fr';
   </div>
 </section>
 <PersonaPaths locale={locale} />
+<section class="container premium-callout" aria-labelledby="home-premium-title">
+  <div><p class="eyebrow">{fr ? 'Version complète' : 'Premium'}</p><h2 id="home-premium-title">{fr ? 'Plus de contrôle, avec la version complète.' : 'More control with Premium.'}</h2>
+    <p>{fr ? 'Ajoutez les alertes à 50 %, 75 % et 90 %, l’historique détaillé des vitesses par interface et la suppression de la bannière sur l’écran principal.' : 'Add 50%, 75%, and 90% threshold alerts, detailed per-interface speed history, and removal of the main-screen banner.'}</p></div>
+  <a href={`${routeFor('features', locale)}#premium`}>{fr ? 'Comparer les versions' : 'Compare Free and Premium'} <span aria-hidden="true">→</span></a>
+</section>
 <section class="container home-detail">
   <div><p class="eyebrow">{fr ? 'Les essentiels' : 'The essentials'}</p><h2>{fr ? 'Des compteurs clairs, des choix qui restent les vôtres.' : 'Clear counters, with settings that stay yours.'}</h2></div>
   <p>{fr ? 'Configurez votre quota et votre cycle, choisissez vos alertes, puis consultez l’historique quand vous en avez besoin. Un achat unique permet de déverrouiller la version complète.' : 'Set your quota and cycle, choose your alerts, then check history when you need it. A one-time purchase unlocks the full version.'}<br/><a href={routeFor('features', locale)}>{fr ? 'Explorer toutes les fonctionnalités' : 'Explore all features'} <span aria-hidden="true">→</span></a></p>
