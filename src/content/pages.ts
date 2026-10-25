@@ -1,6 +1,6 @@
 export const locales = ['fr', 'en'] as const;
 export type Locale = (typeof locales)[number];
-export type PageId = 'home' | 'features' | 'privacy' | 'support' | 'contact' | 'press' | 'legal';
+export type PageId = 'home' | 'features' | 'privacy' | 'support' | 'contact' | 'press' | 'legal' | 'mobileData' | 'networkCounters' | 'travelEsim';
 
 type LocalizedPage = { slug: string; nav: string; title: string; description: string };
 export type PageDefinition = { id: PageId; localized: Record<Locale, LocalizedPage> };
@@ -47,6 +47,27 @@ export const pages = {
     localized: {
       fr: { slug: 'press-kit', nav: 'Presse', title: 'Kit presse — Mata Ara', description: 'Informations et ressources officielles pour présenter Mata Ara.' },
       en: { slug: 'press-kit', nav: 'Press kit', title: 'Press kit — Mata Ara', description: 'Official information and resources for covering Mata Ara.' },
+    },
+  },
+  mobileData: {
+    id: 'mobileData',
+    localized: {
+      fr: { slug: 'suivi-forfait-mobile', nav: 'Suivi du forfait mobile', title: 'Suivi du forfait mobile — Mata Ara', description: 'Configurez votre quota et votre cycle mensuel, puis suivez l’usage cellulaire avec les compteurs de l’appareil.' },
+      en: { slug: 'mobile-data-tracker', nav: 'Mobile data tracking', title: 'Mobile Data Tracker — Mata Ara', description: 'Set your mobile quota and billing cycle, then follow cellular usage and remaining data with device counters.' },
+    },
+  },
+  networkCounters: {
+    id: 'networkCounters',
+    localized: {
+      fr: { slug: 'compteurs-reseau-iphone', nav: 'Compteurs réseau iPhone', title: 'Compteurs réseau iPhone — Mata Ara', description: 'Observez l’activité en envoi et en réception par interface grâce aux compteurs disponibles sur votre iPhone.' },
+      en: { slug: 'iphone-network-counters', nav: 'iPhone network counters', title: 'iPhone Network Counters — Mata Ara', description: 'Explore upload and download activity by network interface using counters available on your iPhone.' },
+    },
+  },
+  travelEsim: {
+    id: 'travelEsim',
+    localized: {
+      fr: { slug: 'suivi-esim-voyage', nav: 'Suivi eSIM en voyage', title: 'Suivi eSIM en voyage — Mata Ara', description: 'Configurez vous-même une enveloppe à durée fixe et sa date d’expiration, puis suivez l’usage cellulaire.' },
+      en: { slug: 'travel-esim-data', nav: 'Travel eSIM tracking', title: 'Travel eSIM Data Tracking — Mata Ara', description: 'Manually set a fixed-period travel quota and expiry date, then follow cellular use on your device.' },
     },
   },
   legal: {
