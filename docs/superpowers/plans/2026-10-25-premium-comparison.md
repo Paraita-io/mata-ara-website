@@ -42,8 +42,9 @@
 ## Task 3: Build and inspect the rendered pages
 
 - [ ] Run `SITE_URL=https://paraita-io.github.io BASE_PATH=/mata-ara-website npm run build`.
-- [ ] Inspect generated `/en/features/`, `/fr/fonctionnalites/`, `/en/`, and `/fr/` HTML for matching comparison claims, the stable anchor, and prefixed home-to-comparison links.
-- [ ] Open the local Safari preview and confirm the table and callout remain legible at desktop and narrow/mobile widths.
+- [ ] Inspect generated `/en/features/` and `/fr/fonctionnalites/` HTML to confirm the shared rows appear in both tiers, Premium-only rows appear only under Premium, the main-screen banner is shown for Free and removed for Premium, and each page contains the localized table caption and one-time purchase note.
+- [ ] Inspect generated `/en/` and `/fr/` HTML to confirm each home callout's localized `<a href>` points to the corresponding prefixed Features route with `#premium`.
+- [ ] Open the local Safari preview and confirm the table and callout remain legible at desktop and narrow/mobile widths. At narrow width, verify the comparison region scrolls horizontally by keyboard and that the region label, caption, and column headers are exposed accessibly.
 - [ ] Run `git diff --check` and review the copy against the approved design before committing.
 
 ## Sources
