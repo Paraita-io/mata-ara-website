@@ -3,11 +3,11 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 import PrivacyPolicy from '../components/PrivacyPolicy.astro';
 import { routeFor } from '../content/pages';
 ---
-<SiteLayout locale="fr" pageId="privacy">
+<SiteLayout locale="en" pageId="privacy">
   <section class="container page-intro">
     <p class="eyebrow">Mata Ara</p>
-    <h1>Politique de confidentialité</h1>
-    <p class="lead">Cette adresse est utilisée par l’application et affiche la politique en français. <a href={routeFor('privacy', 'en')} lang="en">Read this privacy policy in English</a>.</p>
+    <h1>Privacy Policy</h1>
+    <p class="lead">This address is used by the app and displays the policy in English. <a href={routeFor('privacy', 'fr')} lang="fr">Lire cette politique en français</a>.</p>
   </section>
-  <PrivacyPolicy locale="fr" />
+  <PrivacyPolicy locale="en" />
 </SiteLayout>
