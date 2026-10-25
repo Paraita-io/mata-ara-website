@@ -1,6 +1,6 @@
 ---
 import type { Locale } from '../content/pages';
-import { routeFor } from '../content/pages';
+import { publicPath, routeFor } from '../content/pages';
 import PersonaPaths from './PersonaPaths.astro';
 import AppStoreLink from './AppStoreLink.astro';
 
@@ -19,8 +19,9 @@ const fr = locale === 'fr';
   <div class="hero-art" aria-hidden="true">
     <div class="network-orbit orbit-one"></div>
     <div class="network-orbit orbit-two"></div>
-    <div class="network-core"><span class="brand-mark">M</span><span>{fr ? 'Activité réseau' : 'Network activity'}</span><b>{fr ? 'à votre rythme' : 'at your pace'}</b></div>
-    <span class="orbit-dot dot-one"></span><span class="orbit-dot dot-two"></span>
+    <div class="network-core"><img class="network-app-icon" src={publicPath('assets/mata-ara-app-icon.png')} width="56" height="56" alt="" /><span>{fr ? 'Activité réseau' : 'Network activity'}</span><b>{fr ? 'à votre rythme' : 'at your pace'}</b></div>
+    <div class="atom-orbit atom-orbit-one"><span class="orbit-dot dot-one"></span></div>
+    <div class="atom-orbit atom-orbit-two"><span class="orbit-dot dot-two"></span></div>
   </div>
 </section>
 <PersonaPaths locale={locale} />

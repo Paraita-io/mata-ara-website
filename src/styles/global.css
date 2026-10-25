@@ -159,14 +159,19 @@ select {
 .app-store-link--compact { padding: .65rem 1rem; }
 .release-note { width: fit-content; margin-top: var(--space-4); padding: .7rem 1rem; border: 1px solid var(--color-border); border-radius: var(--radius-sm); color: var(--color-ink-soft); font-size: var(--font-size-sm); }
 .hero-art { position: relative; display: grid; min-height: 22rem; place-items: center; overflow: hidden; border-radius: 48% 52% 45% 55% / 52% 43% 57% 48%; background: radial-gradient(circle at center, #fff 0 22%, #dfece6 23% 45%, #edf2e8 46% 70%, transparent 71%); }
-.network-orbit { position: absolute; width: 78%; aspect-ratio: 1; border: 1px solid rgb(29 112 99 / 25%); border-radius: 50%; transform: rotate(-25deg) scaleY(.55); animation: hero-orbit 54s linear infinite; }
-.orbit-two { width: 64%; transform: rotate(28deg) scaleY(.6); border-color: rgb(29 112 99 / 40%); animation-direction: reverse; animation-duration: 68s; }
+.network-orbit { position: absolute; width: 78%; aspect-ratio: 1; border: 1px solid rgb(29 112 99 / 25%); border-radius: 50%; transform: rotate(-25deg) scaleY(.55); animation: hero-orbit-one 54s linear infinite; }
+.orbit-two { width: 64%; transform: rotate(28deg) scaleY(.6); border-color: rgb(29 112 99 / 40%); animation-name: hero-orbit-two; animation-duration: 68s; }
 .network-core { position: relative; display: flex; flex-direction: column; align-items: center; gap: .5rem; padding: 1.5rem; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: rgb(255 255 255 / 90%); box-shadow: var(--shadow-card); text-align: center; font-size: var(--font-size-sm); }
-.network-core .brand-mark { width: 3rem; font-size: 1.35rem; }
+.network-app-icon { display: block; width: 3.5rem; height: 3.5rem; border-radius: .8rem; object-fit: cover; }
 .network-core b { color: var(--color-brand-strong); }
-.orbit-dot { position: absolute; width: .8rem; aspect-ratio: 1; border: 3px solid var(--color-paper); border-radius: 50%; background: var(--color-brand); box-shadow: 0 0 0 1px var(--color-brand); animation: hero-dot 5.5s ease-in-out infinite alternate; }
-.dot-one { top: 22%; right: 20%; }.dot-two { bottom: 22%; left: 17%; background: #aac33c; box-shadow: 0 0 0 1px #879b2f; animation-delay: -2.75s; }
-@keyframes hero-orbit { to { transform: rotate(335deg) scaleY(.55); } }
+.atom-orbit { position: absolute; top: 50%; left: 50%; width: 78%; aspect-ratio: 1; border-radius: 50%; pointer-events: none; animation: hero-atom-one 54s linear infinite; }
+.atom-orbit-two { width: 64%; animation-name: hero-atom-two; animation-duration: 68s; }
+.orbit-dot { position: absolute; top: 0; left: 50%; width: .8rem; aspect-ratio: 1; transform: translate(-50%, -50%); border: 3px solid var(--color-paper); border-radius: 50%; background: var(--color-brand); box-shadow: 0 0 0 1px var(--color-brand); animation: hero-dot 5.5s ease-in-out infinite alternate; }
+.dot-two { background: #aac33c; box-shadow: 0 0 0 1px #879b2f; animation-delay: -2.75s; }
+@keyframes hero-orbit-one { to { transform: rotate(335deg) scaleY(.55); } }
+@keyframes hero-orbit-two { to { transform: rotate(388deg) scaleY(.6); } }
+@keyframes hero-atom-one { from { transform: translate(-50%, -50%) rotate(-25deg) scaleY(.55); } to { transform: translate(-50%, -50%) rotate(335deg) scaleY(.55); } }
+@keyframes hero-atom-two { from { transform: translate(-50%, -50%) rotate(28deg) scaleY(.6); } to { transform: translate(-50%, -50%) rotate(-332deg) scaleY(.6); } }
 @keyframes hero-dot { from { opacity: .78; transform: scale(.92); } to { opacity: 1; transform: scale(1.08); } }
 .persona-section, .tool-section { padding-block: var(--space-12); }
 .section-heading { max-width: 45rem; margin-bottom: var(--space-8); }
@@ -229,7 +234,7 @@ select {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .network-orbit, .orbit-dot { animation: none !important; }
+  .network-orbit, .atom-orbit, .orbit-dot { animation: none !important; }
   *,
   *::before,
   *::after {
