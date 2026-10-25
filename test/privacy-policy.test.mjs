@@ -4,6 +4,7 @@ import test from 'node:test';
 
 const policy = await readFile(new URL('../src/components/PrivacyPolicy.astro', import.meta.url), 'utf8');
 const legal = await readFile(new URL('../src/components/LegalInfo.astro', import.meta.url), 'utf8');
+const readme = await readFile(new URL('../README.md', import.meta.url), 'utf8');
 
 function extractLocaleSection(source, locale) {
   const marker = locale === 'fr' ? '{fr ? (' : ') : (';
@@ -33,6 +34,7 @@ function hasParagraph(entries, predicate) {
 
 const policyRequirements = {
   en: [
+    ['publisher identity and postal contact are disclosed', ({ text }) => /Paraita\.io/.test(text) && /BP 111844/.test(text) && /98709 Mahina/.test(text) && /Tahiti/.test(text) && /French Polynesia/.test(text)],
     ['Google Mobile Ads is identified', ({ text }) => /Google Mobile Ads/.test(text)],
     [
       'UMP consent is described as region-dependent',
@@ -73,6 +75,7 @@ const policyRequirements = {
     ['the privacy contact email appears in a paragraph', ({ text }) => /paraita@paraita\.io/.test(text)],
   ],
   fr: [
+    ['l’identité de l’éditeur et son adresse postale sont indiquées', ({ text }) => /Paraita\.io/.test(text) && /BP 111844/.test(text) && /98709 Mahina/.test(text) && /Tahiti/.test(text) && /Polynésie française/i.test(text)],
     ['Google Mobile Ads est identifié', ({ text }) => /Google Mobile Ads/.test(text)],
     [
       'le consentement UMP est décrit comme dépendant de la région',
@@ -173,4 +176,15 @@ test('neither localized legal page has pending identity or disclosure placeholde
     const localeParagraphs = localizedParagraphMarkup(legal, locale);
     assert.ok(!localeParagraphs.some((text) => placeholder.test(text)), `${locale}: a pending legal placeholder remains`);
   }
+});
+
+test('release URL mapping uses the published GitHub Pages host and privacy choices URL', () => {
+  assert.match(readme, /https:\/\/paraita-io\.github\.io\/mata-ara-website\/en\//);
+  assert.match(readme, /https:\/\/paraita-io\.github\.io\/mata-ara-website\/fr\//);
+  assert.match(readme, /https:\/\/paraita-io\.github\.io\/mata-ara-website\/privacy\//);
+  assert.match(readme, /https:\/\/paraita-io\.github\.io\/mata-ara-website\/en\/privacy\/#ad-privacy-choices/);
+  assert.match(readme, /AdMob European consent message privacy URL.*https:\/\/paraita-io\.github\.io\/mata-ara-website\/en\/privacy\//);
+  assert.doesNotMatch(readme, /<production-domain>|https:\/\/paraita\.io\/privacy/);
+  assert.match(readme, /configured AdMob application and ad-unit identifiers/i);
+  assert.doesNotMatch(readme, /current app source includes the Google UMP package but no UMP consent flow/i);
 });

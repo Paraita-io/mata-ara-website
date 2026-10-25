@@ -53,7 +53,7 @@ For local development, `npm run dev` uses the root path by default. To preview t
 
 For a custom domain, configure its DNS records and GitHub Pages custom-domain setting, add a `public/CNAME` file containing that domain, set `SITE_URL` to its HTTPS origin, and use an empty `BASE_PATH`. Update the Pages workflow values too. A project site's `robots.txt` is emitted under its repository prefix; standard robots discovery is at the host root, which this project-site artifact cannot control.
 
-The app currently links to `https://paraita.io/privacy`. Before release, either serve this site at that custom domain or update the app's in-app privacy URL and the corresponding App Store Connect privacy URL to the final public `/privacy` route.
+The app's in-app privacy link points to `https://paraita-io.github.io/mata-ara-website/privacy/`. The custom domain `paraita.io` is not currently configured with working DNS records; do not use it for release URLs unless DNS and hosting are restored and verified.
 
 ## Release checks
 
@@ -61,23 +61,24 @@ Before publishing, confirm the production domain and `/privacy` compatibility UR
 
 ### App Store Connect URL mapping
 
-Use the final public HTTPS origin after hosting is configured:
+The current GitHub Pages deployment uses these public URLs:
 
 | App Store Connect field | URL |
 | --- | --- |
-| Marketing URL | `https://<production-domain>/en/` (or `/fr/`) |
-| Support URL | `https://<production-domain>/en/support/` (or `/fr/assistance/`) |
-| Privacy Policy URL | `https://<production-domain>/privacy/` (compatibility route used by the current app), or the localized `/fr/confidentialite/` / `/en/privacy/` page |
+| Marketing URL | `https://paraita-io.github.io/mata-ara-website/en/` or `https://paraita-io.github.io/mata-ara-website/fr/` |
+| Support URL | `https://paraita-io.github.io/mata-ara-website/en/support/` or `https://paraita-io.github.io/mata-ara-website/fr/assistance/` |
+| Privacy Policy URL | `https://paraita-io.github.io/mata-ara-website/privacy/` (English compatibility route), `https://paraita-io.github.io/mata-ara-website/en/privacy/`, or `https://paraita-io.github.io/mata-ara-website/fr/confidentialite/` |
+| Privacy Choices URL (optional) | `https://paraita-io.github.io/mata-ara-website/en/privacy/#ad-privacy-choices` |
+| AdMob European consent message privacy URL | `https://paraita-io.github.io/mata-ara-website/en/privacy/` (the page links to French) |
 
-The bracketed production domain is a release input, not a literal URL. Set `SITE_URL` to that HTTPS origin when building for production. The build then emits `sitemap.xml` with only the 14 canonical localized pages and adds its absolute URL to `robots.txt`. Without `SITE_URL`, the build omits the sitemap and uses a host-independent `robots.txt`; it does not guess a production domain. Canonical, social-preview and `hreflang` absolute URLs are likewise omitted until the origin is configured.
+The workflow sets `SITE_URL=https://paraita-io.github.io` and `BASE_PATH=/mata-ara-website`. It emits `sitemap.xml` with the canonical localized pages and adds its absolute URL to `robots.txt`. Without `SITE_URL`, the build omits the sitemap and uses a host-independent `robots.txt`; canonical, social-preview and `hreflang` absolute URLs are likewise omitted.
 
 ### Privacy and App Store release checklist
 
-- Replace the Google sample AdMob application and ad-unit identifiers with the release identifiers, and verify which Google Mobile Ads features and data collection are active in the submitted build.
-- Verify the ATT prompt text/timing and the ads behavior for both authorized and denied states. Confirm and implement any consent flow required for the release markets; the current app source includes the Google UMP package but no UMP consent flow was found in the app code.
+- Verify the configured AdMob application and ad-unit identifiers against the intended production account, and confirm which Google Mobile Ads features and data collection are active in the submitted build.
+- Verify the ATT prompt text/timing and the ads behavior for both authorized and denied states. Confirm that the integrated UMP consent flow is configured for the release markets and that its privacy choices entry works when required.
 - Reconcile the policy with the final SDK configuration and submit accurate App Store Connect App Privacy answers, including data collected by Google Mobile Ads and any Apple purchase processing disclosures.
 - Confirm the intended audience and age rating, and review applicable child/minor privacy and advertising requirements for each release market; verify corresponding App Store and ad SDK settings.
-- Confirm the legal publisher/controller name and any required publisher, jurisdiction, and hosting disclosures before publishing the legal pages and privacy policy.
-- Replace the legal-information notice on both `/fr/mentions-legales` and `/en/legal` with the verified publisher identity and any disclosures required for the publisher's jurisdiction. Do not launch with the notice still stating that these details are pending.
+- Confirm that the disclosed publisher identity, address, jurisdiction, and hosting disclosures are accurate and meet the publisher's applicable legal requirements.
 - Confirm the Mata Ara mark and app-icon permissions for every intended press use; the press-kit downloads are supplied for review and editorial preparation and do not grant reproduction or commercial-use rights.
 - Confirm the French and English privacy policy and contact URLs are live, publicly fetchable, and match the release build before App Review.
