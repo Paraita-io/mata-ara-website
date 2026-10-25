@@ -5,7 +5,7 @@ export const useCases = {
       title: 'Mobile Data Tracker — Mata Ara',
       description: 'Set your mobile quota and billing cycle, then follow cellular usage and remaining data with device counters.',
       paragraphs: [
-        'Enter the data allowance from your mobile plan and choose the day your monthly billing cycle begins. Mata Ara compares cellular usage on your device with the quota you configured, so you can see what remains during the cycle.',
+        'Enter the data allowance from your mobile plan and choose a monthly cycle start day from 1 to 28. Mata Ara compares cellular usage on your device with the quota you configured, so you can see what remains during the cycle.',
         'Review upload and download activity, then use hourly and daily history to understand how usage changes. Charts can show 24 hours, 7 days, 1 month, or 3 months of recorded history.',
         'If the displayed total needs adjustment, you can recalibrate tracking in the app. The counters come from your device and may not match your carrier’s billing total; use your carrier’s records as the billing reference.',
       ],
@@ -17,7 +17,7 @@ export const useCases = {
       title: 'Suivi du forfait mobile — Mata Ara',
       description: 'Configurez votre quota et votre cycle mensuel, puis suivez l’usage cellulaire avec les compteurs de l’appareil.',
       paragraphs: [
-        'Saisissez le volume de données de votre forfait et choisissez le jour de début de votre cycle mensuel. Mata Ara compare l’usage cellulaire mesuré sur votre appareil au quota configuré pour vous indiquer ce qu’il vous reste pendant le cycle.',
+        'Saisissez le volume de données de votre forfait et choisissez le jour de début de votre cycle mensuel, entre le 1 et le 28. Mata Ara compare l’usage cellulaire mesuré sur votre appareil au quota configuré pour vous indiquer ce qu’il vous reste pendant le cycle.',
         'Consultez l’activité en envoi et en réception, puis l’historique horaire et journalier pour comprendre son évolution. Les graphiques peuvent couvrir 24 heures, 7 jours, 1 mois ou 3 mois de relevés.',
         'Si le total affiché doit être ajusté, vous pouvez recalibrer le suivi dans l’app. Les compteurs viennent de l’appareil et peuvent différer du total de facturation de votre opérateur ; consultez celui-ci comme référence de facturation.',
       ],
