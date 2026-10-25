@@ -20,6 +20,8 @@ const socialImage = configuredSiteUrl ? new URL(publicPath('assets/mata-ara-mark
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={pageDescription} />
     <meta name="theme-color" content="#f7f8f3" />
+    <link rel="icon" type="image/png" sizes="32x32" href={publicPath('assets/mata-ara-favicon-32.png')} />
+    <link rel="apple-touch-icon" sizes="180x180" href={publicPath('assets/mata-ara-apple-touch-icon-180.png')} />
     <title>{pageTitle}</title>
     {canonical && <link rel="canonical" href={canonical} />}
     {configuredSiteUrl && <>

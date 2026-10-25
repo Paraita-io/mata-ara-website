@@ -121,6 +121,7 @@ select {
 .header-inner, .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); min-height: 4.5rem; }
 .brand { display: inline-flex; align-items: center; gap: 0.65rem; color: var(--color-ink); font-weight: 750; text-decoration: none; white-space: nowrap; }
 .brand-mark { display: grid; width: 2rem; aspect-ratio: 1; place-items: center; border-radius: 0.65rem; background: var(--color-brand); color: var(--color-white); }
+.brand-logo { display: block; width: 2rem; height: 2rem; flex: none; border-radius: 0.65rem; object-fit: cover; }
 .header-nav, .footer-nav { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); margin: 0; padding: 0; list-style: none; }
 .header-nav a, .footer-nav a, .language-switch { color: var(--color-ink); font-size: var(--font-size-sm); font-weight: 600; }
 .header-nav a[aria-current="page"] { text-decoration-thickness: 0.15em; text-underline-offset: 0.35em; }
@@ -158,13 +159,15 @@ select {
 .app-store-link--compact { padding: .65rem 1rem; }
 .release-note { width: fit-content; margin-top: var(--space-4); padding: .7rem 1rem; border: 1px solid var(--color-border); border-radius: var(--radius-sm); color: var(--color-ink-soft); font-size: var(--font-size-sm); }
 .hero-art { position: relative; display: grid; min-height: 22rem; place-items: center; overflow: hidden; border-radius: 48% 52% 45% 55% / 52% 43% 57% 48%; background: radial-gradient(circle at center, #fff 0 22%, #dfece6 23% 45%, #edf2e8 46% 70%, transparent 71%); }
-.network-orbit { position: absolute; width: 78%; aspect-ratio: 1; border: 1px solid rgb(29 112 99 / 25%); border-radius: 50%; transform: rotate(-25deg) scaleY(.55); }
-.orbit-two { width: 64%; transform: rotate(28deg) scaleY(.6); border-color: rgb(29 112 99 / 40%); }
+.network-orbit { position: absolute; width: 78%; aspect-ratio: 1; border: 1px solid rgb(29 112 99 / 25%); border-radius: 50%; transform: rotate(-25deg) scaleY(.55); animation: hero-orbit 54s linear infinite; }
+.orbit-two { width: 64%; transform: rotate(28deg) scaleY(.6); border-color: rgb(29 112 99 / 40%); animation-direction: reverse; animation-duration: 68s; }
 .network-core { position: relative; display: flex; flex-direction: column; align-items: center; gap: .5rem; padding: 1.5rem; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: rgb(255 255 255 / 90%); box-shadow: var(--shadow-card); text-align: center; font-size: var(--font-size-sm); }
 .network-core .brand-mark { width: 3rem; font-size: 1.35rem; }
 .network-core b { color: var(--color-brand-strong); }
-.orbit-dot { position: absolute; width: .8rem; aspect-ratio: 1; border: 3px solid var(--color-paper); border-radius: 50%; background: var(--color-brand); box-shadow: 0 0 0 1px var(--color-brand); }
-.dot-one { top: 22%; right: 20%; }.dot-two { bottom: 22%; left: 17%; background: #aac33c; box-shadow: 0 0 0 1px #879b2f; }
+.orbit-dot { position: absolute; width: .8rem; aspect-ratio: 1; border: 3px solid var(--color-paper); border-radius: 50%; background: var(--color-brand); box-shadow: 0 0 0 1px var(--color-brand); animation: hero-dot 5.5s ease-in-out infinite alternate; }
+.dot-one { top: 22%; right: 20%; }.dot-two { bottom: 22%; left: 17%; background: #aac33c; box-shadow: 0 0 0 1px #879b2f; animation-delay: -2.75s; }
+@keyframes hero-orbit { to { transform: rotate(335deg) scaleY(.55); } }
+@keyframes hero-dot { from { opacity: .78; transform: scale(.92); } to { opacity: 1; transform: scale(1.08); } }
 .persona-section, .tool-section { padding-block: var(--space-12); }
 .section-heading { max-width: 45rem; margin-bottom: var(--space-8); }
 .section-heading h2, .home-detail h2 { margin: 0; font-size: var(--font-size-xl); line-height: 1.15; letter-spacing: -.025em; }
@@ -226,6 +229,7 @@ select {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .network-orbit, .orbit-dot { animation: none !important; }
   *,
   *::before,
   *::after {
