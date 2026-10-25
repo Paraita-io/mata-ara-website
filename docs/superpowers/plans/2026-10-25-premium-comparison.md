@@ -27,7 +27,7 @@
 - [ ] Show shared features as included in both tiers: configured quota and live interface counters; general History tab; Apple Watch and Home Screen widget; 100% quota notification; rate warning, expiry reminder and unusual-usage alerts.
 - [ ] Show Premium-only features accurately: detailed per-interface upload/download speed-history sheet opened from a monitoring card; optional 50%, 75% and 90% threshold notifications; removal of the main-screen banner ad. Avoid saying all ads disappear throughout the app.
 - [ ] State that Premium is a one-time in-app purchase and that the current price is shown by the App Store; do not hard-code a price.
-- [ ] Style the table to remain readable on mobile and desktop. Retain table semantics, headers, visible focus states and adequate contrast.
+- [ ] Put the semantic table in a horizontally scrollable region with a minimum table width of 42rem on narrow screens. Give the region an accessible localized label, and add a localized `<caption>` that states Premium includes the Free features. Retain scoped column headers, visible keyboard focus, and adequate contrast.
 
 ## Task 2: Promote Premium from the home page
 
