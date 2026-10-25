@@ -4,6 +4,7 @@ import test from 'node:test';
 import { useCases } from '../src/content/use-cases.mjs';
 
 const routeMetadata = await readFile(new URL('../src/content/pages.ts', import.meta.url), 'utf8');
+const personaPaths = await readFile(new URL('../src/components/PersonaPaths.astro', import.meta.url), 'utf8');
 
 const expected = {
   mobileData: { en: '/en/mobile-data-tracker/', fr: '/fr/suivi-forfait-mobile/' },
@@ -32,6 +33,18 @@ test('all three use cases have the approved paired localized routes', () => {
       assert.equal(localizedMetadata(id, locale).route, route);
     }
   }
+});
+
+test('homepage use-case cards link directly to their matching localized pages', () => {
+  for (const [id, locales] of Object.entries(expected)) {
+    assert.equal(personaPaths.split(`id: '${id}'`).length - 1, 2, `both localized cards must map to the '${id}' page`);
+    for (const [locale, route] of Object.entries(locales)) {
+      const { route: registeredRoute } = localizedMetadata(id, locale);
+      assert.equal(registeredRoute, route, `${id}/${locale} target must be its dedicated use-case route`);
+    }
+  }
+  assert.match(personaPaths, /href=\{routeFor\(path\.id, locale\)\}/, 'homepage cards must remain semantic links using their localized route');
+  assert.doesNotMatch(personaPaths, /routeFor\('features', locale\).*#/, 'homepage cards must not target feature-page fragments');
 });
 
 test('each use case has distinct localized metadata and substantive copy', () => {
