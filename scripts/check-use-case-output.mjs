@@ -28,6 +28,8 @@ const expectedUseCaseRoutes = Object.entries(expected).map(([slug, { locale }]) 
 
 for (const locale of ['en', 'fr']) {
   const home = await readFile(resolve('dist', locale, 'index.html'), 'utf8');
+  const featuresRoute = locale === 'en' ? `${basePath}/en/features/` : `${basePath}/fr/fonctionnalites/`;
+  assert.ok(home.includes(`href="${featuresRoute}#premium"`), `${locale} homepage links to its Premium comparison`);
   for (const [, route] of Object.entries({
     mobileData: locale === 'en' ? `${basePath}/en/mobile-data-tracker/` : `${basePath}/fr/suivi-forfait-mobile/`,
     networkCounters: locale === 'en' ? `${basePath}/en/iphone-network-counters/` : `${basePath}/fr/compteurs-reseau-iphone/`,
@@ -37,6 +39,35 @@ for (const locale of ['en', 'fr']) {
   assert.ok(home.includes(`href="${basePath}/assets/mata-ara-favicon-32.png"`), `${locale} homepage loads the favicon`);
   assert.ok(home.includes(`href="${basePath}/assets/mata-ara-apple-touch-icon-180.png"`), `${locale} homepage loads the Apple touch icon`);
   const features = await readFile(resolve('dist', locale, locale === 'en' ? 'features' : 'fonctionnalites', 'index.html'), 'utf8');
+  assert.ok(features.includes('id="premium"'), `${locale} features page exposes the Premium comparison anchor`);
+  assert.match(features, /<table class="comparison-table"><caption>[^<]+<\/caption>/, `${locale} comparison has a caption`);
+  const columnHeaders = [...features.matchAll(/<th scope="col">([^<]+)<\/th>/g)].map((match) => match[1]);
+  assert.deepEqual(columnHeaders, locale === 'en' ? ['Feature', 'Free', 'Premium'] : ['Fonctionnalité', 'Gratuite', 'Complète'], `${locale} comparison has the localized tier order`);
+  assert.match(features, /<th scope="row">[^<]+<\/th>/, `${locale} comparison has scoped row headers`);
+  const comparisonRows = locale === 'en' ? [
+    ['Configured quota and live network-interface counters', 'Included', 'Included'],
+    ['History tab and usage charts', 'Included', 'Included'],
+    ['100% quota notification', 'Included', 'Included'],
+    ['Rate warning, expiry reminder, and unusual-usage alert', 'Included', 'Included'],
+    ['Apple Watch companion and Home Screen widget', 'Included', 'Included'],
+    ['Optional notifications at 50%, 75%, and 90% thresholds', '—', 'Included'],
+    ['Detailed per-interface upload and download speed history, opened from a monitoring card', '—', 'Included'],
+    ['Banner ad on the main screen', 'Shown', 'Removed'],
+  ] : [
+    ['Quota configuré et compteurs réseau actualisés en direct', 'Inclus', 'Inclus'],
+    ['Onglet Historique et graphiques d’usage', 'Inclus', 'Inclus'],
+    ['Notifications de quota à 100 %', 'Inclus', 'Inclus'],
+    ['Alerte de débit, rappel d’expiration et alerte de consommation inhabituelle', 'Inclus', 'Inclus'],
+    ['Compagnon Apple Watch et widget d’écran d’accueil', 'Inclus', 'Inclus'],
+    ['Notifications facultatives aux seuils de 50 %, 75 % et 90 %', '—', 'Inclus'],
+    ['Historique détaillé des vitesses en envoi et réception par interface, depuis une fiche de suivi', '—', 'Inclus'],
+    ['Bannière publicitaire sur l’écran principal', 'Affichée', 'Supprimée'],
+  ];
+  const renderedRows = [...features.matchAll(/<tr><th scope="row">([^<]+)<\/th><td>([^<]+)<\/td><td>([^<]+)<\/td><\/tr>/g)].map((match) => match.slice(1));
+  assert.deepEqual(renderedRows, comparisonRows, `${locale} comparison assigns each capability to the correct tier`);
+  assert.ok(features.includes(locale === 'en'
+    ? 'Premium is a one-time in-app purchase. The current price is shown by the App Store.'
+    : 'La version complète est proposée comme achat intégré unique. Le prix actuel est affiché par l’App Store.'), `${locale} comparison explains the one-time purchase and price`);
   const featureRoutes = locale === 'en'
     ? [`${basePath}/en/mobile-data-tracker/`, `${basePath}/en/iphone-network-counters/`, `${basePath}/en/travel-esim-data/`]
     : [`${basePath}/fr/suivi-forfait-mobile/`, `${basePath}/fr/compteurs-reseau-iphone/`, `${basePath}/fr/suivi-esim-voyage/`];
