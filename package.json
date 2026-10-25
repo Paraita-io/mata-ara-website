@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && node scripts/generate-release-metadata.mjs",
+    "build": "astro build && node scripts/generate-release-metadata.mjs && node scripts/check-use-case-output.mjs",
     "preview": "astro preview",
     "test": "node --test"
   },

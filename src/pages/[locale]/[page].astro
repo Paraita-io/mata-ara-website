@@ -7,24 +7,27 @@ import PrivacyPolicy from '../../components/PrivacyPolicy.astro';
 import ContactDetails from '../../components/ContactDetails.astro';
 import LegalInfo from '../../components/LegalInfo.astro';
 import PressKit from '../../components/PressKit.astro';
+import UseCasePage from '../../components/UseCasePage.astro';
 export function getStaticPaths() {
   return allPageEntries().filter(({ slug }) => slug.length > 0)
     .map(({ id, locale, slug }) => ({ params: { locale, page: slug }, props: { id, locale } }));
 }
 const { id, locale } = Astro.props as { id: PageId; locale: Locale };
 const page = pages[id].localized[locale];
+const isUseCase = id === 'mobileData' || id === 'networkCounters' || id === 'travelEsim';
 ---
 <SiteLayout locale={locale} pageId={id}>
-  <section class="container page-intro">
+  {!isUseCase && <section class="container page-intro">
     <p class="eyebrow">Mata Ara</p>
     <h1>{page.title.replace(/ — Mata Ara$/, '')}</h1>
     <p class="lead">{page.description}</p>
-  </section>
+  </section>}
   {id === 'features' && <FeatureCards locale={locale} />}
   {id === 'support' && <SupportFAQ locale={locale} />}
   {id === 'privacy' && <PrivacyPolicy locale={locale} />}
   {id === 'contact' && <ContactDetails locale={locale} />}
   {id === 'legal' && <LegalInfo locale={locale} />}
   {id === 'press' && <PressKit locale={locale} />}
+  {isUseCase && <UseCasePage id={id} locale={locale} />}
   <slot />
 </SiteLayout>

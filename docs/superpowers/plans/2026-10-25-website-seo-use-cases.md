@@ -91,7 +91,7 @@
 - Modify: `README.md` release/SEO notes if needed.
 - Verify: generated routes and metadata.
 
-- [ ] Run `npm test` and `SITE_URL=https://paraita-io.github.io BASE_PATH=/mata-ara-website npm run build`.
+- [ ] Run `npm test` and `SITE_URL=https://paraita-io.github.io BASE_PATH=/mata-ara-website npm run build`; the configured build runs `scripts/check-use-case-output.mjs` after generating the static routes and release metadata.
 - [ ] Inspect all six generated use-case files for `<html lang>`, unique `<title>` and meta description, self canonical, correctly paired `hreflang`, exactly one H1, visible breadcrumbs, JSON-LD parity, ordinary crawlable anchor links, and the release-gated App Store CTA.
 - [ ] Inspect homepage output to confirm its links point directly to all use-case pages in each locale.
 - [ ] Verify `dist/sitemap.xml` includes each localized route with `/mata-ara-website/` and `dist/robots.txt` references the configured sitemap URL. Confirm no `/dist/` local paths or unprefixed route URLs leak into canonical/JSON-LD/icon URLs.
