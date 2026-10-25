@@ -21,6 +21,26 @@ const expected = {
 
 const titles = new Set();
 const descriptions = new Set();
+const renderedTitles = new Set();
+const renderedDescriptions = new Set();
+const expectedUseCaseRoutes = Object.entries(expected).map(([slug, { locale }]) => `${basePath}/${locale}/${slug}/`);
+
+for (const locale of ['en', 'fr']) {
+  const home = await readFile(resolve('dist', locale, 'index.html'), 'utf8');
+  for (const [, route] of Object.entries({
+    mobileData: locale === 'en' ? `${basePath}/en/mobile-data-tracker/` : `${basePath}/fr/suivi-forfait-mobile/`,
+    networkCounters: locale === 'en' ? `${basePath}/en/iphone-network-counters/` : `${basePath}/fr/compteurs-reseau-iphone/`,
+    travelEsim: locale === 'en' ? `${basePath}/en/travel-esim-data/` : `${basePath}/fr/suivi-esim-voyage/`,
+  })) assert.ok(home.includes(`href="${route}"`), `${locale} homepage links directly to ${route}`);
+  assert.ok(home.includes(`src="${basePath}/assets/mata-ara-mark.png"`), `${locale} homepage loads the brand mark`);
+  assert.ok(home.includes(`href="${basePath}/assets/mata-ara-favicon-32.png"`), `${locale} homepage loads the favicon`);
+  assert.ok(home.includes(`href="${basePath}/assets/mata-ara-apple-touch-icon-180.png"`), `${locale} homepage loads the Apple touch icon`);
+  const features = await readFile(resolve('dist', locale, locale === 'en' ? 'features' : 'fonctionnalites', 'index.html'), 'utf8');
+  const featureRoutes = locale === 'en'
+    ? [`${basePath}/en/mobile-data-tracker/`, `${basePath}/en/iphone-network-counters/`, `${basePath}/en/travel-esim-data/`]
+    : [`${basePath}/fr/suivi-forfait-mobile/`, `${basePath}/fr/compteurs-reseau-iphone/`, `${basePath}/fr/suivi-esim-voyage/`];
+  for (const route of featureRoutes) assert.ok(features.includes(`href="${route}"`), `${locale} features page links directly to ${route}`);
+}
 
 for (const [slug, { id, locale, alternate, related }] of Object.entries(expected)) {
   const html = await readFile(resolve('dist', locale, slug, 'index.html'), 'utf8');
@@ -31,6 +51,15 @@ for (const [slug, { id, locale, alternate, related }] of Object.entries(expected
   assert.ok(html.includes(`<link rel="canonical" href="${canonicalOrigin}${route}"`), `${route} has its canonical URL`);
   assert.match(html, /<title>[^<]+<\/title>/, `${route} has a title`);
   assert.match(html, /<meta name="description" content="[^"]+"/, `${route} has a description`);
+  const renderedTitle = html.match(/<title>([^<]+)<\/title>/)?.[1];
+  const renderedDescription = html.match(/<meta name="description" content="([^"]+)"/)?.[1];
+  assert.ok(renderedTitle, `${route} title is present`);
+  assert.ok(renderedDescription, `${route} description is present`);
+  renderedTitles.add(renderedTitle);
+  renderedDescriptions.add(renderedDescription);
+  assert.ok(html.includes(`src="${basePath}/assets/mata-ara-mark.png"`), `${route} loads the brand mark`);
+  assert.ok(html.includes(`href="${basePath}/assets/mata-ara-favicon-32.png"`), `${route} loads the favicon`);
+  assert.ok(html.includes(`href="${basePath}/assets/mata-ara-apple-touch-icon-180.png"`), `${route} loads the Apple touch icon`);
   assert.ok(html.includes(`hreflang="${locale === 'en' ? 'fr' : 'en'}" href="${canonicalOrigin}${alternateRoute}"`), `${route} has its paired locale alternate`);
   assert.ok(html.includes(`href="${basePath}/${locale}/"`), `${route} has a crawlable home breadcrumb`);
   assert.match(html, /<nav[^>]+aria-label="(?:Breadcrumbs?|Fil d’Ariane)"/i, `${route} has visible breadcrumbs`);
@@ -63,5 +92,20 @@ for (const [slug, { id, locale, alternate, related }] of Object.entries(expected
 
 assert.equal(titles.size, 6, 'all use-case routes have unique localized titles');
 assert.equal(descriptions.size, 6, 'all use-case routes have unique localized descriptions');
+assert.equal(renderedTitles.size, 6, 'all rendered use-case titles are unique');
+assert.equal(renderedDescriptions.size, 6, 'all rendered use-case descriptions are unique');
 
-console.log(`Verified six use-case routes under ${basePath || '/'} with canonical, paired alternates, breadcrumbs, JSON-LD, copy, and App Store action.`);
+for (const route of expectedUseCaseRoutes) {
+  assert.ok((await readFile(resolve('dist/sitemap.xml'), 'utf8')).includes(`<loc>${canonicalOrigin}${route}</loc>`), `sitemap includes ${route}`);
+}
+const robots = await readFile(resolve('dist/robots.txt'), 'utf8');
+assert.ok(robots.includes(`Sitemap: ${canonicalOrigin}${basePath}/sitemap.xml`), 'robots.txt references the configured sitemap URL');
+assert.doesNotMatch(robots, /\/dist\//, 'robots.txt does not expose local dist paths');
+for (const slug of Object.keys(expected)) {
+  const { locale } = expected[slug];
+  const html = await readFile(resolve('dist', locale, slug, 'index.html'), 'utf8');
+  assert.doesNotMatch(html, /(?:href|src)="[^"]*\/dist\//, `${locale}/${slug} does not expose dist paths`);
+  assert.doesNotMatch(html, new RegExp(`(?:href|src)="${locale === 'en' ? 'en' : 'fr'}/`), `${locale}/${slug} does not expose unprefixed route URLs`);
+}
+
+console.log(`Verified six use-case routes, home and feature discovery, icons, metadata, sitemap and robots under ${basePath || '/'}.`);

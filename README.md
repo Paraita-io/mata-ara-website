@@ -51,6 +51,10 @@ The repository includes a GitHub Actions workflow that builds and publishes the 
 
 For local development, `npm run dev` uses the root path by default. To preview the project-site path locally, build with the same `SITE_URL` and `BASE_PATH` values and run `npm run preview`.
 
+### Google Search Console
+
+After the site is deployed, open [Google Search Console](https://search.google.com/search-console/) and add the public URL-prefix property `https://paraita-io.github.io/mata-ara-website/`. Complete the ownership verification method Search Console offers for that property, then open **Sitemaps** and submit `https://paraita-io.github.io/mata-ara-website/sitemap.xml`. The deployed `robots.txt` also references this sitemap. Sitemap submission helps Google discover the pages; it does not guarantee that they will be crawled, indexed, or shown in search results.
+
 For a custom domain, configure its DNS records and GitHub Pages custom-domain setting, add a `public/CNAME` file containing that domain, set `SITE_URL` to its HTTPS origin, and use an empty `BASE_PATH`. Update the Pages workflow values too. A project site's `robots.txt` is emitted under its repository prefix; standard robots discovery is at the host root, which this project-site artifact cannot control.
 
 The app's in-app privacy link points to `https://paraita-io.github.io/mata-ara-website/privacy/`. The custom domain `paraita.io` is not currently configured with working DNS records; do not use it for release URLs unless DNS and hosting are restored and verified.

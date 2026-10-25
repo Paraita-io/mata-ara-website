@@ -5,6 +5,7 @@ import { useCases } from '../src/content/use-cases.mjs';
 
 const routeMetadata = await readFile(new URL('../src/content/pages.ts', import.meta.url), 'utf8');
 const personaPaths = await readFile(new URL('../src/components/PersonaPaths.astro', import.meta.url), 'utf8');
+const featureCards = await readFile(new URL('../src/components/FeatureCards.astro', import.meta.url), 'utf8');
 
 const expected = {
   mobileData: { en: '/en/mobile-data-tracker/', fr: '/fr/suivi-forfait-mobile/' },
@@ -53,6 +54,13 @@ test('homepage use-case cards link directly to their matching localized pages', 
   }
   assert.match(personaPaths, /href=\{routeFor\(path\.id, locale\)\}/, 'homepage cards must remain semantic links using their localized route');
   assert.doesNotMatch(personaPaths, /routeFor\('features', locale\).*#/, 'homepage cards must not target feature-page fragments');
+});
+
+test('matching feature sections link directly to the localized use-case pages', () => {
+  for (const [section, id] of [['data', 'mobileData'], ['interfaces', 'networkCounters'], ['travel', 'travelEsim']]) {
+    assert.match(featureCards, new RegExp(`id: '${section}', page: '${id}'`), `${section} section maps to its dedicated page`);
+  }
+  assert.match(featureCards, /href=\{routeFor\(group\.page, locale\)\}/, 'feature links are semantic anchors to localized routes');
 });
 
 test('each use case has distinct localized metadata and substantive copy', () => {
