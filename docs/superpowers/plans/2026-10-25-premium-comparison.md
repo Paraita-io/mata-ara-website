@@ -1,0 +1,53 @@
+# Free and Premium Comparison Implementation Plan
+
+> **For agentic workers:** Use `superpowers:subagent-driven-development` if delegation is available. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** Make the current free and Premium differences visible on the home and Features pages in English and French.
+
+**Architecture:** Keep one bilingual comparison definition inside the Features page component. Render a semantic three-column table with Premium including the Free tier, give it the `#premium` anchor, and add a compact home callout linking to it with `routeFor`.
+
+**Tech Stack:** Astro 7, HTML, CSS, static GitHub Pages build.
+
+---
+
+## File map
+
+- `src/components/FeatureCards.astro`: add the bilingual free/Premium comparison table and one-time purchase note after the feature/tools content.
+- `src/components/HomePageContent.astro`: add the compact bilingual Premium callout after the home use-case cards and link it to `routeFor('features', locale) + '#premium'`.
+- `src/styles/global.css`: add readable responsive table/callout styles consistent with existing site tokens.
+- `docs/superpowers/specs/2026-10-25-free-premium-comparison-design.md`: authoritative tier facts; do not widen the copy beyond verified app gates.
+
+## Task 1: Add the bilingual comparison to Features
+
+**Files:**
+- Modify: `src/components/FeatureCards.astro`
+- Modify: `src/styles/global.css`
+
+- [ ] Add an English/French comparison section with stable `id="premium"` and three semantic columns: feature, Free, Premium.
+- [ ] Show shared features as included in both tiers: configured quota and live interface counters; general History tab; Apple Watch and Home Screen widget; 100% quota notification; rate warning, expiry reminder and unusual-usage alerts.
+- [ ] Show Premium-only features accurately: detailed per-interface upload/download speed-history sheet opened from a monitoring card; optional 50%, 75% and 90% threshold notifications; removal of the main-screen banner ad. Avoid saying all ads disappear throughout the app.
+- [ ] State that Premium is a one-time in-app purchase and that the current price is shown by the App Store; do not hard-code a price.
+- [ ] Put the semantic table in a horizontally scrollable region with a minimum table width of 42rem on narrow screens. Give the region an accessible localized label, and add a localized `<caption>` that states Premium includes the Free features. Retain scoped column headers, visible keyboard focus, and adequate contrast.
+
+## Task 2: Promote Premium from the home page
+
+**Files:**
+- Modify: `src/components/HomePageContent.astro`
+- Modify: `src/styles/global.css`
+
+- [ ] Add a concise bilingual Premium callout after the use-case cards and before the existing lower home detail section.
+- [ ] Mention the three Premium benefits: threshold alerts, detailed per-interface speed history, and removal of the main-screen banner.
+- [ ] Add a descriptive ordinary `<a href>` to the Features page's `#premium` section using `routeFor`; preserve the current locale and GitHub Pages base prefix.
+
+## Task 3: Build and inspect the rendered pages
+
+- [ ] Run `SITE_URL=https://paraita-io.github.io BASE_PATH=/mata-ara-website npm run build`.
+- [ ] Inspect generated `/en/features/` and `/fr/fonctionnalites/` HTML to confirm the shared rows appear in both tiers, Premium-only rows appear only under Premium, the main-screen banner is shown for Free and removed for Premium, and each page contains the localized table caption and one-time purchase note.
+- [ ] Inspect generated `/en/` and `/fr/` HTML to confirm each home callout's localized `<a href>` points to the corresponding prefixed Features route with `#premium`.
+- [ ] Open the local Safari preview and confirm the table and callout remain legible at desktop and narrow/mobile widths. At narrow width, verify the comparison region scrolls horizontally by keyboard and that the region label, caption, and column headers are exposed accessibly.
+- [ ] Run `git diff --check` and review the copy against the approved design before committing.
+
+## Sources
+
+- Approved tier facts: `docs/superpowers/specs/2026-10-25-free-premium-comparison-design.md`.
+- Current app gates: `Mata Ara/Presentation/Views/OptionsViewNew.swift`, `Mata Ara/Presentation/Views/MainViewMultiInterface.swift`, `Mata Ara/Domain/Services/AdConsentManager.swift`, and `Mata Ara/iap/PurchasableContent.storekit`.
