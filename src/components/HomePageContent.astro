@@ -2,6 +2,7 @@
 import type { Locale } from '../content/pages';
 import { publicPath, routeFor } from '../content/pages';
 import PersonaPaths from './PersonaPaths.astro';
+import ProductScreenshots from './ProductScreenshots.astro';
 import AppStoreLink from './AppStoreLink.astro';
 
 const { locale } = Astro.props as { locale: Locale };
@@ -19,12 +20,18 @@ const fr = locale === 'fr';
   <div class="hero-art" aria-hidden="true">
     <div class="network-orbit orbit-one"></div>
     <div class="network-orbit orbit-two"></div>
-    <div class="network-core"><img class="network-app-icon" src={publicPath('assets/mata-ara-app-icon.png')} width="56" height="56" alt="" /><span>{fr ? 'Activité réseau' : 'Network activity'}</span><b>{fr ? 'à votre rythme' : 'at your pace'}</b></div>
+    <img class="hero-device-art" src={publicPath('assets/marketing/iphone-monitoring-tilt-portrait.webp')} width="1080" height="1920" alt="" fetchpriority="high" decoding="async" />
     <div class="atom-orbit atom-orbit-one"><span class="orbit-dot dot-one"></span></div>
     <div class="atom-orbit atom-orbit-two"><span class="orbit-dot dot-two"></span></div>
   </div>
 </section>
 <PersonaPaths locale={locale} />
+<ProductScreenshots locale={locale} />
+<section class="container daily-tools-callout" aria-labelledby="daily-tools-title">
+  <div><p class="eyebrow">{fr ? 'Au quotidien' : 'Everyday tools'}</p><h2 id="daily-tools-title">{fr ? 'Mata Ara vous accompagne partout.' : 'Mata Ara stays close wherever you go.'}</h2>
+    <p>{fr ? 'Notifications utiles, widget configurable sur l’écran d’accueil, app Apple Watch et complications sur le cadran.' : 'Useful notifications, a configurable Home Screen widget, the Apple Watch app, and watch face complications.'}</p></div>
+  <a class="button-link" href={`${routeFor('features', locale)}#tool-title`}>{fr ? 'Voir ces fonctionnalités' : 'Explore these features'} <span aria-hidden="true">→</span></a>
+</section>
 <section class="container premium-callout" aria-labelledby="home-premium-title">
   <div><p class="eyebrow">{fr ? 'Version complète' : 'Premium'}</p><h2 id="home-premium-title">{fr ? 'Plus de contrôle, avec la version complète.' : 'More control with Premium.'}</h2>
     <p>{fr ? 'Ajoutez les alertes à 50 %, 75 % et 90 %, l’historique détaillé des vitesses par interface et la suppression de la bannière sur l’écran principal.' : 'Add 50%, 75%, and 90% threshold alerts, detailed per-interface speed history, and removal of the main-screen banner.'}</p></div>

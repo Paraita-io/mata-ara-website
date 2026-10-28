@@ -1,0 +1,118 @@
+---
+import type { Locale, PageId } from '../content/pages';
+import { publicPath, routeFor } from '../content/pages';
+
+const { locale } = Astro.props as { locale: Locale };
+const fr = locale === 'fr';
+const examples: Array<{
+  page: PageId;
+  number: string;
+  title: string;
+  description: string;
+  link: string;
+  image: string;
+  alt: string;
+  device: 'phone' | 'watch';
+}> = fr ? [
+  {
+    page: 'mobileData', number: '01', title: 'Votre forfait, en un regard',
+    description: 'Consommation, volume restant et vitesses cellulaires sur le même écran.',
+    link: 'Découvrir le suivi du forfait', image: 'assets/monkr/iphone-monitoring-mint.webp',
+    alt: 'Écran Mata Ara affichant le suivi cellulaire, le quota restant et les vitesses en envoi et réception.', device: 'phone',
+  },
+  {
+    page: 'mobileData', number: '02', title: 'Repérez l’évolution de l’usage',
+    description: 'Parcourez les graphiques horaires et journaliers sur plusieurs périodes.',
+    link: 'Voir les fonctionnalités', image: 'assets/app-screenshots/iphone-history.webp',
+    alt: 'Écran Historique de Mata Ara avec des graphiques de consommation cellulaire et Wi-Fi.', device: 'phone',
+  },
+  {
+    page: 'networkCounters', number: '03', title: 'Explorez les interfaces réseau',
+    description: 'Choisissez les interfaces à afficher et consultez leurs compteurs.',
+    link: 'Découvrir les compteurs réseau', image: 'assets/app-screenshots/iphone-interfaces.webp',
+    alt: 'Écran Mata Ara listant les interfaces réseau que l’on peut afficher ou masquer.', device: 'phone',
+  },
+  {
+    page: 'mobileData', number: '04', title: 'Gardez le quota au poignet',
+    description: 'Retrouvez rapidement la part consommée et le volume encore disponible sur Apple Watch.',
+    link: 'Découvrir le suivi du forfait', image: 'assets/app-screenshots/apple-watch-usage.webp',
+    alt: 'Écran Apple Watch Mata Ara indiquant 75 % restants, 250 MB consommés et 750 MB disponibles.', device: 'watch',
+  },
+] : [
+  {
+    page: 'mobileData', number: '01', title: 'Your plan, at a glance',
+    description: 'See cellular usage, remaining allowance, and live upload and download speeds together.',
+    link: 'Explore data tracking', image: 'assets/monkr/iphone-monitoring-mint.webp',
+    alt: 'Mata Ara screen showing cellular usage, remaining quota, and upload and download speeds.', device: 'phone',
+  },
+  {
+    page: 'mobileData', number: '02', title: 'See how usage changes',
+    description: 'Explore hourly and daily charts across several time ranges.',
+    link: 'Explore app features', image: 'assets/app-screenshots/iphone-history.webp',
+    alt: 'Mata Ara History screen with cellular and Wi-Fi usage charts.', device: 'phone',
+  },
+  {
+    page: 'networkCounters', number: '03', title: 'Explore network interfaces',
+    description: 'Choose which interfaces to display and review their counters.',
+    link: 'Explore network counters', image: 'assets/app-screenshots/iphone-interfaces.webp',
+    alt: 'Mata Ara screen listing network interfaces that can be shown or hidden.', device: 'phone',
+  },
+  {
+    page: 'mobileData', number: '04', title: 'Check your allowance from your wrist',
+    description: 'Quickly see how much of your quota is used and how much remains on Apple Watch.',
+    link: 'Explore data tracking', image: 'assets/app-screenshots/apple-watch-usage.webp',
+    alt: 'Mata Ara Apple Watch screen showing 75% remaining, 250 MB used, and 750 MB left.', device: 'watch',
+  },
+];
+---
+
+<section class="container screenshot-showcase" aria-labelledby="screenshot-showcase-title">
+  <div class="section-heading screenshot-showcase-heading">
+    <p class="eyebrow">{fr ? 'Dans l’app' : 'Inside the app'}</p>
+    <h2 id="screenshot-showcase-title">{fr ? 'Un suivi clair, sur iPhone et Apple Watch.' : 'A clearer view on iPhone and Apple Watch.'}</h2>
+    <p>{fr ? 'Quelques exemples des écrans qui vous aident à suivre votre forfait et l’activité réseau.' : 'A few of the screens that help you follow your plan and network activity.'}</p>
+  </div>
+  <div class="screenshot-grid">
+    {examples.map((example) => <article class:list={['screenshot-card', example.device === 'watch' && 'screenshot-card--watch']}>
+      <div class="screenshot-copy">
+        <span class="screenshot-number">{example.number}</span>
+        <h3>{example.title}</h3>
+        <p>{example.description}</p>
+      </div>
+      <div class:list={['device-stage', example.device === 'watch' && 'device-stage--watch', example.number === '01' && 'device-stage--mockup']}>
+        <figure class:list={['device-frame', example.device === 'watch' && 'device-frame--watch', example.number === '01' && 'device-frame--mockup']}>
+          <img src={publicPath(example.image)} alt={example.alt} width={example.device === 'watch' ? 396 : example.number === '01' ? 2160 : 1206} height={example.device === 'watch' ? 484 : example.number === '01' ? 3840 : 2622} loading="lazy" decoding="async" />
+        </figure>
+      </div>
+      <a class="screenshot-link" href={routeFor(example.page, locale)}>{example.link}<span aria-hidden="true"> →</span></a>
+    </article>)}
+  </div>
+  <p class="screenshot-note">{fr ? 'Écrans d’exemple avec données de démonstration.' : 'Example screens shown with demo data.'}</p>
+</section>
+
+<style>
+  .screenshot-showcase { padding-block: var(--space-12); }
+  .screenshot-showcase-heading { max-width: 50rem; }
+  .screenshot-showcase-heading > p:last-child { color: var(--color-ink-soft); }
+  .screenshot-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-4); }
+  .screenshot-card { display: flex; min-width: 0; flex-direction: column; padding: clamp(1rem, 2vw, 1.5rem); border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); box-shadow: var(--shadow-card); }
+  .screenshot-copy { min-height: 8rem; }
+  .screenshot-number { color: var(--color-brand); font-size: var(--font-size-sm); font-weight: 800; letter-spacing: .08em; }
+  .screenshot-card h3 { margin: var(--space-3) 0 var(--space-2); font-size: 1.15rem; line-height: 1.25; }
+  .screenshot-card p { margin: 0; color: var(--color-ink-soft); font-size: var(--font-size-sm); }
+  .device-stage { display: grid; min-height: 30rem; place-items: center; margin-block: var(--space-4); padding: 1rem; overflow: hidden; border: 1px solid rgb(62 93 255 / 10%); border-radius: var(--radius-lg); background: radial-gradient(ellipse at 50% 32%, #fff 0 35%, #eef1ff 82%); }
+  .device-frame { width: min(100%, 13rem); margin: 0; padding: .34rem; overflow: hidden; border: 1px solid #20252a; border-radius: 2.25rem; background: #12171b; box-shadow: 0 1.2rem 2.2rem rgb(24 37 34 / 20%), 0 .2rem .45rem rgb(24 37 34 / 12%); }
+  .device-frame img { display: block; width: 100%; height: auto; border-radius: 1.9rem; }
+  .device-stage--watch { background: radial-gradient(ellipse at 50% 48%, #fff 0 30%, #eef1ff 82%); }
+  .device-stage--mockup { padding: 0; border: 0; background: transparent; }
+  .device-frame--mockup { width: min(100%, 13rem); padding: 0; border: 0; border-radius: 1rem; background: transparent; box-shadow: none; }
+  .device-frame--mockup img { border-radius: 1rem; }
+  .device-frame--watch { width: min(100%, 14rem); padding: .42rem; border-radius: 2.3rem; }
+  .device-frame--watch img { border-radius: 1.95rem; }
+  .screenshot-link { display: inline-block; margin-top: auto; padding-top: var(--space-4); color: var(--color-brand-strong); font-weight: 700; text-decoration: none; }
+  .screenshot-link:hover { text-decoration: underline; }
+  .screenshot-note { margin: var(--space-4) 0 0; color: var(--color-ink-soft); font-size: var(--font-size-sm); }
+  @media (max-width: 68rem) { .screenshot-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 40rem) { .screenshot-grid { grid-template-columns: 1fr; } .screenshot-copy { min-height: 0; } .device-stage { min-height: 30rem; } }
+  @media (prefers-reduced-motion: reduce) { .screenshot-card { scroll-behavior: auto; } }
+</style>

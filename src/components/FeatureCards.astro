@@ -1,5 +1,5 @@
 ---
-import { routeFor, type Locale, type PageId } from '../content/pages';
+import { publicPath, routeFor, type Locale, type PageId } from '../content/pages';
 const { locale } = Astro.props as { locale: Locale };
 const fr = locale === 'fr';
 const groups = fr ? [
@@ -12,13 +12,15 @@ const groups = fr ? [
   { id: 'travel', page: 'travelEsim' as PageId, no: '03', title: 'Stay on top of usage while travelling', intro: 'Set an allowance yourself to match your temporary travel plan.', bullets: ['Choose a fixed-period quota and its expiry date.', 'Monitor cellular use during the trip and recalibrate the counters if needed.', 'Get a local notification when your configured plan is due to expire within 24 hours.', 'Mata Ara does not detect eSIM profiles or read carrier billing data. Device counters can differ from your carrier’s total.'] },
 ];
 const tools = fr ? [
-  { title: 'Des alertes à votre rythme', text: 'Notification locale à 100 % du quota dans la version standard; les alertes à 50 %, 75 % et 90 % sont incluses dans la version complète. L’app propose aussi une alerte de débit, un rappel d’expiration et un signalement d’une consommation inhabituelle.' },
-  { title: 'Un aperçu au poignet et sur l’écran d’accueil', text: 'Une app compagnon Apple Watch et un widget d’écran d’accueil configurable complètent le suivi.' },
-  { title: 'Un déverrouillage intégral, en une fois', text: 'L’app propose un achat unique pour déverrouiller la version complète. Consultez l’App Store pour les détails de disponibilité.' },
+  { title: 'Une alerte quand le quota approche', text: 'Recevez une notification locale au seuil choisi. Cette capture du simulateur montre l’alerte iOS quand le quota atteint 90 %.', image: 'assets/app-screenshots/iphone-notification-quota-90.webp', alt: 'Bannière de notification iOS de Mata Ara sur l’écran d’accueil du simulateur iPhone : « 90% reached » et « You’ve reached 90% of your monthly limit! »', visual: 'phone' },
+  { title: 'Choisissez vos alertes', text: 'Activez les seuils de quota, l’alerte de vitesse, le rappel d’expiration ou la détection d’une consommation inhabituelle.', image: 'assets/app-screenshots/iphone-notification-settings.webp', alt: 'Capture réelle des réglages de notification de Mata Ara sur iPhone : seuils à 75 % et 100 % activés, ainsi que l’alerte de consommation inhabituelle.', visual: 'phone' },
+  { title: 'Votre quota sur l’écran d’accueil', text: 'Retrouvez d’un coup d’œil l’usage de vos interfaces réseau grâce au widget Mata Ara.', image: 'assets/app-screenshots/iphone-home-screen-widget.webp', alt: 'Capture réelle de l’écran d’accueil du simulateur iPhone avec le widget Mata Ara affichant les compteurs cellulaires, Wi‑Fi et Bluetooth.', visual: 'phone' },
+  { title: 'Le suivi continue au poignet', text: 'Consultez le quota et les données restantes dans l’app compagnon Apple Watch. La montre indique aussi son état de synchronisation avec l’iPhone et permet de lancer une synchronisation.', image: 'assets/app-screenshots/apple-watch-usage.webp', alt: 'Capture de l’app Mata Ara sur Apple Watch : 75 % du quota restant, 250 Mo consommés et 750 Mo restants.', visual: 'watch' },
 ] : [
-  { title: 'Alerts on your terms', text: 'A local notification at 100% of your quota is available in the standard version; 50%, 75%, and 90% alerts are part of the full version. The app also offers a rate warning, expiry reminder, and unusual-usage alert.' },
-  { title: 'A glance from your wrist or Home Screen', text: 'An Apple Watch companion and a configurable Home Screen widget extend your tracking.' },
-  { title: 'One-time full-version unlock', text: 'The app offers a one-time purchase to unlock the full version. See the App Store for availability details.' },
+  { title: 'An alert as you approach your quota', text: 'Get a local notification at the threshold you choose. This iPhone simulator screenshot shows the iOS alert when usage reaches 90%.', image: 'assets/app-screenshots/iphone-notification-quota-90.webp', alt: 'Mata Ara iOS notification banner on the iPhone simulator Home Screen: “90% reached” and “You’ve reached 90% of your monthly limit!”', visual: 'phone' },
+  { title: 'Choose your alerts', text: 'Turn on quota thresholds, speed warnings, plan expiry reminders, or unusual-usage detection.', image: 'assets/app-screenshots/iphone-notification-settings.webp', alt: 'Real screenshot of Mata Ara notification settings on iPhone, with the 75% and 100% thresholds and unusual-usage alerts enabled.', visual: 'phone' },
+  { title: 'Your quota on the Home Screen', text: 'Check network-interface usage at a glance with the Mata Ara widget.', image: 'assets/app-screenshots/iphone-home-screen-widget.webp', alt: 'Real iPhone simulator Home Screen screenshot showing the Mata Ara widget with cellular, Wi‑Fi, and Bluetooth counters.', visual: 'phone' },
+  { title: 'Keep tracking from your wrist', text: 'Check your quota and remaining data in the Apple Watch companion app. The watch also shows its sync status with iPhone and lets you start a sync.', image: 'assets/app-screenshots/apple-watch-usage.webp', alt: 'Mata Ara Apple Watch app showing 75% of the quota remaining, 250 MB used, and 750 MB left.', visual: 'watch' },
 ];
 
 const comparison = fr ? {
@@ -59,7 +61,7 @@ const comparison = fr ? {
       <a class="text-link feature-use-case-link" href={routeFor(group.page, locale)}>{fr ? 'En savoir plus sur cet usage' : 'Learn more about this use case'} <span aria-hidden="true">→</span></a>
     </section>)}
   </div>
-  <section class="container tool-section" aria-labelledby="tool-title"><div class="section-heading"><p class="eyebrow">{fr ? 'Au quotidien' : 'Everyday tools'}</p><h2 id="tool-title">{fr ? 'Les détails qui font la différence.' : 'The details that make a difference.'}</h2></div><div class="tool-grid">{tools.map((tool) => <article class="tool-card"><h3>{tool.title}</h3><p>{tool.text}</p></article>)}</div></section>
+  <section class="container tool-section" aria-labelledby="tool-title"><div class="section-heading"><p class="eyebrow">{fr ? 'Toujours à portée de main' : 'Always within reach'}</p><h2 id="tool-title">{fr ? 'Les fonctions qui vous accompagnent.' : 'Features that stay close by.'}</h2><p>{fr ? 'Notifications, widget d’écran d’accueil et compagnon Apple Watch, illustrés par des captures de l’app.' : 'Notifications, a Home Screen widget, and the Apple Watch companion, shown with app screenshots.'}</p></div><div class="tool-grid tool-grid--featured">{tools.map((tool) => <article class="tool-card tool-card--featured"><div class:list={['tool-visual', `tool-visual--${tool.visual}`]}><img src={publicPath(tool.image)} alt={tool.alt} loading="lazy" decoding="async" /></div><div class="tool-card-copy"><h3>{tool.title}</h3><p>{tool.text}</p></div></article>)}</div></section>
   <section class="container premium-section" id="premium" aria-labelledby="premium-title">
     <div class="section-heading"><p class="eyebrow">{fr ? 'Choisissez votre version' : 'Choose your version'}</p><h2 id="premium-title">{comparison.title}</h2><p>{comparison.intro}</p></div>
     <div class="comparison-scroll" role="region" aria-label={comparison.region} tabindex="0">

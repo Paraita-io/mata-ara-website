@@ -42,8 +42,8 @@ const fr = locale === 'fr';
   <div class="press-assets">
     <h2>{fr ? 'Ressources de marque' : 'Brand assets'}</h2>
     <p>{fr
-      ? 'Ces fichiers sont les ressources Mata Ara fournies avec le projet de l’application : le symbole de marque issu des ressources graphiques v2 et l’icône marketing présente dans le catalogue d’icônes iOS.'
-      : 'These Mata Ara files come from the app project: the mark from its v2 artwork and the marketing icon from its iOS icon catalog.'}</p>
+      ? 'Téléchargez le symbole de marque, l’icône de l’app et deux mises en scène de l’iPhone réalisées avec Monkr à partir des captures de démonstration Mata Ara.'
+      : 'Download the brand mark, app icon, and two iPhone mockups created with Monkr from Mata Ara demo screenshots.'}</p>
     <div class="press-asset-grid">
       <article class="press-asset-card">
         <img src={publicPath('assets/mata-ara-mark.png')} width="1024" height="1024" alt={fr ? 'Symbole Mata Ara sur fond transparent' : 'Mata Ara mark on a transparent background'} loading="lazy" />
@@ -54,6 +54,16 @@ const fr = locale === 'fr';
         <img src={publicPath('assets/mata-ara-app-icon.png')} width="1024" height="1024" alt={fr ? 'Icône de l’application Mata Ara' : 'Mata Ara app icon'} loading="lazy" />
         <h3>{fr ? 'Icône de l’application · PNG · 1024 × 1024' : 'App icon · PNG · 1024 × 1024'}</h3>
         <a class="button-link" href={publicPath('press-kit/mata-ara-app-icon-1024.png')} download>{fr ? 'Télécharger l’icône' : 'Download the app icon'} <span aria-hidden="true">↓</span></a>
+      </article>
+      <article class="press-asset-card">
+        <img src={publicPath('assets/marketing/iphone-monitoring-tilt-portrait.webp')} width="1080" height="1920" alt={fr ? 'Mockup incliné d’un iPhone affichant Mata Ara, sur fond menthe' : 'Tilted iPhone mockup showing Mata Ara on a mint background'} loading="lazy" decoding="async" />
+        <h3>{fr ? 'Mise en scène iPhone portrait · WebP · 1080 × 1920' : 'Portrait iPhone mockup · WebP · 1080 × 1920'}</h3>
+        <a class="button-link" href={publicPath('assets/marketing/iphone-monitoring-tilt-portrait.webp')} download>{fr ? 'Télécharger le visuel portrait' : 'Download portrait artwork'} <span aria-hidden="true">↓</span></a>
+      </article>
+      <article class="press-asset-card">
+        <img src={publicPath('assets/marketing/iphone-monitoring-tilt-landscape.webp')} width="1920" height="1080" alt={fr ? 'Mockup incliné d’un iPhone affichant Mata Ara, sur fond menthe au format paysage' : 'Tilted iPhone mockup showing Mata Ara on a mint landscape background'} loading="lazy" decoding="async" />
+        <h3>{fr ? 'Mise en scène iPhone paysage · WebP · 1920 × 1080' : 'Landscape iPhone mockup · WebP · 1920 × 1080'}</h3>
+        <a class="button-link" href={publicPath('assets/marketing/iphone-monitoring-tilt-landscape.webp')} download>{fr ? 'Télécharger le visuel paysage' : 'Download landscape artwork'} <span aria-hidden="true">↓</span></a>
       </article>
     </div>
     <p class="press-terms">{fr
